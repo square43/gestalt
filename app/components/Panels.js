@@ -4,6 +4,9 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Nav from "./Nav";
+import Welcome from "./Welcome";
+import Similarity from "./panels/Similarity";
+import Closure from "./panels/Closure";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,36 +48,42 @@ const Panels = () => {
             },
           },
         );
-        gsap.to(dots[i], {
-          scale: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: panel,
-            start: "-100% top",
-            end: "top top",
-            scrub: true,
-          },
-        });
+        if (dots[i]) {
+          gsap.to(dots[i], {
+            scale: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: panel,
+              start: "-100% top",
+              end: "top top",
+              scrub: true,
+            },
+          });
+        }
       }
     });
   });
   const principles = [
-    { color: "bg-[#28AFB0]", name: "Emergence" },
-    { color: "bg-[#F4D35E]", name: "Closure (Reification)" },
-    { color: "bg-[#EE964B]", name: "Common Region" },
-    { color: "bg-[#F786AA]", name: "Continuity or Continuation" },
-    { color: "bg-[#B0D4B6]", name: "Proximity" },
-    { color: "bg-[#F06860]", name: "Multistability" },
-    { color: "bg-[#F4D35E]", name: "Figure/Ground" },
-    { color: "bg-[#28AFB0]", name: "Invariance" },
-    { color: "bg-[#EE964B]", name: "Pragnanz" },
-    { color: "bg-[#F786AA]", name: "Similarity" },
-    { color: "bg-[#F06860]", name: "Symmetry and Order" },
-    { color: "bg-[#F4D35E]", name: "Common Fate" },
+    //  { color: "bg-[#F4D35E]", name: "Similarity" },
+    //  { color: "bg-[#EE964B]", name: "Common Region" },
+    //  { color: "bg-[#F786AA]", name: "Continuity or Continuation" },
+    //  { color: "bg-[#B0D4B6]", name: "Proximity" },
+    //  { color: "bg-[#F06860]", name: "Multistability" },
+    //  { color: "bg-[#F4D35E]", name: "Figure/Ground" },
+    //  { color: "bg-[#28AFB0]", name: "Invariance" },
+    //  { color: "bg-[#EE964B]", name: "Pragnanz" },
+    //  { color: "bg-[#F786AA]", name: "Similarity" },
+    //  { color: "bg-[#F06860]", name: "Symmetry and Order" },
+    //  { color: "bg-[#F4D35E]", name: "Common Fate" },
   ];
   return (
     <div ref={main}>
       <div className="scroller">
+        <Welcome />
+        <div>
+          <Similarity />
+          <Closure />
+        </div>
         {principles.map((principle, index) => (
           <div
             id={`section${index}`}

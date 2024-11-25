@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${wendy.className} antialiased`}>
-        <ReactLenis options={{ larp: 0.1 }} root>
+        <ReactLenis options={{ lerp: 0.05 }} root>
           {children}
         </ReactLenis>
       </body>

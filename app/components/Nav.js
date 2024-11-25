@@ -4,7 +4,7 @@ export default function Nav({ principles }) {
   const lenis = useLenis();
 
   return (
-    <div className="fixed right-[60px] top-1/2 flex -translate-y-1/2 flex-col items-center gap-[20px] rounded-full bg-white p-[10px]">
+    <div className="fixed right-[2%] top-1/2 flex -translate-y-1/2 flex-col items-center gap-[20px] rounded-full bg-white p-[10px]">
       {principles.map((principle, index) => (
         <button
           key={index}

@@ -2,19 +2,35 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
+import SplitType from "split-type";
 
 export default function Closure() {
   const panel = useRef();
   useGSAP(
     () => {
+      const title = new SplitType("#section3 .title", { types: "chars" });
+      gsap.set(title.chars, {
+        transformOrigin: "bottom",
+      });
+      gsap.from(title.chars, {
+        scaleY: 0,
+        scrollTrigger: {
+          trigger: ".trigger",
+          scrub: true,
+          start: "top top",
+          end: "center bottom",
+        },
+        stagger: 0.1,
+      });
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".trigger",
           start: "top top",
-          end: "bottom bottom",
+          end: "65% bottom",
           scrub: true,
         },
       });
+
       tl.from(".part1", {
         x: "210%",
         y: "220%",
@@ -89,7 +105,7 @@ export default function Closure() {
   return (
     <div
       ref={panel}
-      id="section2"
+      id="section3"
       className={`panel bg-[#EE964B] shadow-[0_0_30px_0_rgba(0,0,0,0.25)]`}
       style={{
         transformStyle: "preserve-3d",
@@ -99,7 +115,7 @@ export default function Closure() {
     >
       <div className="trigger !mx-auto h-[300vh]">
         <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start">
-          <h2 className="mb-[5vw] text-center text-[128px] text-black">
+          <h2 className="title my-[3vw] text-center text-[4vw] text-black">
             2. Closure
           </h2>
           <div className="cube">

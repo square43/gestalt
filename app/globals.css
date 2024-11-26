@@ -18,3 +18,13 @@ body {
     text-wrap: balance;
   }
 }
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 40px;
+  height: 40px;
+  background: #f4d35e;
+  cursor: pointer;
+  border-radius: 50%;
+}

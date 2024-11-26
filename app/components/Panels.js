@@ -7,6 +7,7 @@ import Nav from "./Nav";
 import Welcome from "./Welcome";
 import Similarity from "./panels/Similarity";
 import Closure from "./panels/Closure";
+import Continuity from "./panels/Continuity";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -53,7 +54,7 @@ const Panels = () => {
             scale: 1,
             ease: "none",
             scrollTrigger: {
-              trigger: panel,
+              trigger: panels[i],
               start: "-100% top",
               end: "top top",
               scrub: true,
@@ -63,19 +64,7 @@ const Panels = () => {
       }
     });
   });
-  const principles = [
-    //  { color: "bg-[#F4D35E]", name: "Similarity" },
-    //  { color: "bg-[#EE964B]", name: "Common Region" },
-    //  { color: "bg-[#F786AA]", name: "Continuity or Continuation" },
-    //  { color: "bg-[#B0D4B6]", name: "Proximity" },
-    //  { color: "bg-[#F06860]", name: "Multistability" },
-    //  { color: "bg-[#F4D35E]", name: "Figure/Ground" },
-    //  { color: "bg-[#28AFB0]", name: "Invariance" },
-    //  { color: "bg-[#EE964B]", name: "Pragnanz" },
-    //  { color: "bg-[#F786AA]", name: "Similarity" },
-    //  { color: "bg-[#F06860]", name: "Symmetry and Order" },
-    //  { color: "bg-[#F4D35E]", name: "Common Fate" },
-  ];
+
   return (
     <div ref={main}>
       <div className="scroller">
@@ -83,27 +72,17 @@ const Panels = () => {
         <div>
           <Similarity />
           <Closure />
+          <Continuity />
         </div>
-        {principles.map((principle, index) => (
-          <div
-            id={`section${index}`}
-            key={index}
-            className={`panel !mx-auto h-[300vh] ${principle.color} shadow-[0_0_30px_0_rgba(0,0,0,0.25)]`}
-            style={{
-              transformStyle: "preserve-3d",
-              transform: index != 0 && "perspective(240px) rotateX(1deg)",
-              transformOrigin: "top",
-            }}
-          >
-            <div className="sticky left-0 top-0 flex h-screen w-full items-center justify-center">
-              <h1 className="text-center text-[128px] text-black">
-                {index + 1}. {principle.name}
-              </h1>
-            </div>
-          </div>
-        ))}
       </div>
-      <Nav principles={principles} />
+      <Nav
+        principles={[
+          { color: "bg-[#28AFB0]", name: "" },
+          { color: "bg-[#F4D35E]", name: "Similarity" },
+          { color: "bg-[#EE964B]", name: "Closure" },
+          { color: "bg-[#F786AA]", name: "Continuity" },
+        ]}
+      />
     </div>
   );
 };

@@ -7,7 +7,7 @@ export default function Welcome() {
   const panel = useRef();
   useGSAP(
     () => {
-      const title = new SplitType(".title", { types: "chars" });
+      const title = new SplitType("#section1 .title", { types: "chars" });
       gsap.set(title.chars, {
         transformOrigin: "bottom",
       });

@@ -4,10 +4,13 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Nav from "./Nav";
-import Welcome from "./Welcome";
+import Welcome from "./panels/Welcome";
 import Similarity from "./panels/Similarity";
 import Closure from "./panels/Closure";
 import Continuity from "./panels/Continuity";
+import Figure from "./panels/Figure";
+import Simplicity from "./panels/Simplicity";
+import Symmetry from "./panels/Symmetry";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -73,6 +76,9 @@ const Panels = () => {
           <Similarity />
           <Closure />
           <Continuity />
+          <Figure />
+          <Simplicity />
+          <Symmetry />
         </div>
       </div>
       <Nav
@@ -81,6 +87,9 @@ const Panels = () => {
           { color: "bg-[#F4D35E]", name: "Similarity" },
           { color: "bg-[#EE964B]", name: "Closure" },
           { color: "bg-[#F786AA]", name: "Continuity" },
+          { color: "bg-[#86dc7d]", name: "Figure-Ground" },
+          { color: "bg-[#ff9191]", name: "Simplicity" },
+          { color: "bg-[#28AFB0]", name: "Symmetry" },
         ]}
       />
     </div>

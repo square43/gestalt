@@ -22,7 +22,7 @@ export default function PersistenceOfVision() {
 
   useGSAP(
     () => {
-      const title = new SplitType("#section5 .title", { types: "chars" });
+      const title = new SplitType("#section8 .title", { types: "chars" });
       gsap.set(title.chars, {
         transformOrigin: "bottom",
       });
@@ -56,7 +56,7 @@ export default function PersistenceOfVision() {
             7. Persistence of Vision
           </h2>
           <div className="w-[40vw]">
-            <Image
+            <img
               ref={image}
               src={`/persistence-of-vision/horse${frame}.png`}
               alt="Animation frame"

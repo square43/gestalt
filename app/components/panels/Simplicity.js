@@ -16,7 +16,6 @@ export default function Simplicity() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          scrub: true,
           start: "top top",
           end: "center bottom",
         },

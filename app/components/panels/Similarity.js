@@ -15,7 +15,6 @@ export default function Similarity() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          scrub: true,
           start: "top top",
           end: "center bottom",
         },

@@ -17,7 +17,6 @@ export default function Symmetry() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          scrub: true,
           start: "top top",
           end: "center bottom",
         },
@@ -28,44 +27,43 @@ export default function Symmetry() {
   );
 
   useEffect(() => {
-    const updatePositions = (event) => {
-      const mouseX = event.clientX;
-      const mouseY = event.clientY;
-      console.log(mouseY);
-      const mappedValueX = (event.clientX / window.innerWidth) * 2 - 1;
-      const mappedValueY = (event.clientY / window.innerHeight) * 2 - 1;
-      const mouseOnRight = mouseX > window.innerWidth / 2;
-      const mouseOnBottom = mouseY > window.innerHeight / 2;
+    const updatePositions = ({ clientX, clientY }) => {
+      const mappedValueX = (clientX / window.innerWidth) * 2 - 1;
+      const mappedValueY = (clientY / window.innerHeight) * 2 - 1;
+      const mouseOnRight = clientX > window.innerWidth / 2;
+      const mouseOnBottom = clientY > window.innerHeight / 2;
       const intensity = 150;
+
+      const calculateOffset = (isPositive, value, strength) =>
+        isPositive
+          ? value * intensity * strength
+          : -value * intensity * strength;
+
       circles.current.forEach((circle, index) => {
-        const strengthX = circle.getAttribute("data-strength-x");
-        const strengthY = circle.getAttribute("data-strength-y");
+        const strengthX =
+          parseFloat(circle.getAttribute("data-strength-x")) || 1;
+        const strengthY =
+          parseFloat(circle.getAttribute("data-strength-y")) || 1;
 
         const isRightCircle = index % 4 >= 2;
         const isBottomCircle = index < 8;
-        let offset;
-        if (mouseOnRight) {
-          offset = isRightCircle
-            ? { ...offset, x: mappedValueX * intensity * strengthX }
-            : { ...offset, x: -mappedValueX * intensity * strengthX };
-        } else {
-          offset = isRightCircle
-            ? { ...offset, x: -mappedValueX * intensity * strengthX }
-            : { ...offset, x: mappedValueX * intensity * strengthX };
-        }
-        if (mouseOnBottom) {
-          offset = isBottomCircle
-            ? { ...offset, y: -mappedValueY * intensity * strengthY }
-            : { ...offset, y: mappedValueY * intensity * strengthY };
-        } else {
-          offset = isBottomCircle
-            ? { ...offset, y: mappedValueY * intensity * strengthY }
-            : { ...offset, y: -mappedValueY * intensity * strengthY };
-        }
+
+        const offset = {
+          x: calculateOffset(
+            mouseOnRight === isRightCircle,
+            mappedValueX,
+            strengthX,
+          ),
+          y: calculateOffset(
+            mouseOnBottom === isBottomCircle,
+            mappedValueY,
+            strengthY,
+          ),
+        };
 
         gsap.to(circle, {
           x: offset.x,
-          y: offset.y,
+          y: -offset.y,
           duration: 1,
           ease: "power3.out",
         });
@@ -98,7 +96,7 @@ export default function Symmetry() {
             6. Symmetry
           </h2>
           <div className="absolute left-1/2 top-1/2 flex h-full w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center">
-            <div className="grid h-[33vw] w-[33vw] grid-cols-4 grid-rows-4 items-center gap-4">
+            <div className="grid h-[25vw] w-[25vw] grid-cols-4 grid-rows-4 items-center gap-[0]">
               {Array.from({ length: 16 }).map((_, index) => {
                 return (
                   <div
@@ -113,7 +111,7 @@ export default function Symmetry() {
                     id={index}
                     key={index}
                     ref={(el) => (circles.current[index] = el)}
-                    className={`h-[8vw] w-[8vw] self-center justify-self-center rounded-full bg-[#F4D35E] mix-blend-overlay`}
+                    className={`h-[6vw] max-h-[100px] w-[6vw] max-w-[100px] self-center justify-self-center rounded-full bg-[#F4D35E] mix-blend-overlay`}
                   ></div>
                 );
               })}

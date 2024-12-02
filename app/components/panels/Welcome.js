@@ -1,10 +1,20 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
-
+import { useLenis } from "lenis/react";
 export default function Welcome() {
   const panel = useRef();
+  const lenis = useLenis();
+
+  useEffect(() => {
+    // Ensure Lenis exists before manipulating it
+    if (lenis) lenis.stop(); // Lock scrolling at the start
+    setTimeout(() => {
+      if (lenis) lenis.start();
+    }, 4000);
+  }, [lenis]);
+
   useGSAP(
     () => {
       const title = new SplitType("#section1 .title", { types: "chars" });

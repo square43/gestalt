@@ -20,7 +20,6 @@ export default function Continuity() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          scrub: true,
           start: "top top",
           end: "center bottom",
         },

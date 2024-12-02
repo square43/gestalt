@@ -11,6 +11,7 @@ import Continuity from "./panels/Continuity";
 import Figure from "./panels/Figure";
 import Simplicity from "./panels/Simplicity";
 import Symmetry from "./panels/Symmetry";
+import PersistenceOfVision from "./panels/PersistenceOfVision";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -79,6 +80,7 @@ const Panels = () => {
           <Figure />
           <Simplicity />
           <Symmetry />
+          <PersistenceOfVision />
         </div>
       </div>
       <Nav
@@ -90,6 +92,7 @@ const Panels = () => {
           { color: "bg-[#86dc7d]", name: "Figure-Ground" },
           { color: "bg-[#ff9191]", name: "Simplicity" },
           { color: "bg-[#28AFB0]", name: "Symmetry" },
+          { color: "bg-[#F4D35E]", name: "Persistence of Vision" },
         ]}
       />
     </div>

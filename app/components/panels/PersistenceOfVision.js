@@ -7,12 +7,12 @@ import Image from "next/image";
 export default function PersistenceOfVision() {
   const panel = useRef();
   const image = useRef();
-  const [frame, setFrame] = useState(1);
+  const [frame, setFrame] = useState(0);
   const [delay, setDelay] = useState(50);
 
   useEffect(() => {
     const switchFrame = () => {
-      setFrame((prevFrame) => (prevFrame < 8 ? prevFrame + 1 : 1));
+      setFrame((prevFrame) => (prevFrame < 7 ? prevFrame + 1 : 0));
     };
 
     const interval = setInterval(switchFrame, delay);
@@ -55,15 +55,15 @@ export default function PersistenceOfVision() {
           <h2 className="title my-[3vw] text-center text-[4vw] text-black">
             7. Persistence of Vision
           </h2>
-          <div className="w-[40vw]">
+          <div className="w-[40vw] overflow-hidden">
             <Image
               ref={image}
-              src={`/persistence-of-vision/horse${frame}.png?t=${frame}`}
+              src={`/persistence-of-vision/sprite.png`}
               alt="Animation frame"
-              width={1920}
+              width={15360}
               height={1080}
-              unoptimized
-              className="h-auto w-full"
+              className="h-auto w-[800%] max-w-none"
+              style={{ transform: `translateX(-${frame * (100 / 8)}%)` }}
             />
           </div>
 
@@ -90,11 +90,7 @@ export default function PersistenceOfVision() {
                 <div className="relative h-[70px]">
                   <div className="h-full w-[10px] rounded-full bg-black"></div>
                   <div
-                    className={`absolute left-1/2 top-0 transition-all duration-500 ${
-                      delay === value
-                        ? "translate-y-full bg-[#28afb0]"
-                        : "translate-y-0 bg-[#EE964B]"
-                    } h-1/2 w-[20px] -translate-x-1/2 rounded-full`}
+                    className={`absolute left-1/2 top-0 transition-all duration-500 ${delay === value ? "translate-y-full bg-[#28afb0]" : "translate-y-0 bg-[#EE964B]"} h-1/2 w-[20px] -translate-x-1/2 rounded-full`}
                   ></div>
                 </div>
                 <span className="text-[14px]">{label}</span>

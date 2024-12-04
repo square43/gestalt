@@ -9,7 +9,17 @@ export default function Closure() {
   useGSAP(
     () => {
       const title = new SplitType("#section3 .title", { types: "chars" });
+      const subtitle = new SplitType("#section3 .subtitle", { types: "words" });
+      const paragraph = new SplitType("#section3 .paragraph", {
+        types: "lines",
+      });
       gsap.set(title.chars, {
+        transformOrigin: "bottom",
+      });
+      gsap.set(subtitle.words, {
+        transformOrigin: "bottom",
+      });
+      gsap.set(paragraph.lines, {
         transformOrigin: "bottom",
       });
       gsap.from(title.chars, {
@@ -20,6 +30,40 @@ export default function Closure() {
           end: "center bottom",
         },
         stagger: 0.1,
+        ease: "elastic.out(1.2,1)",
+      });
+
+      gsap.from(subtitle.words, {
+        scaleY: 0,
+        scrollTrigger: {
+          trigger: ".trigger",
+          start: "top top",
+          end: "center bottom",
+        },
+        stagger: 0.1,
+        ease: "elastic.out(1.2,1)",
+      });
+      gsap.from(paragraph.lines, {
+        delay: 1,
+        scaleY: 0,
+        scrollTrigger: {
+          trigger: ".trigger",
+          start: "top top",
+          end: "center bottom",
+        },
+        stagger: 0.1,
+      });
+      gsap.from(".objects", {
+        delay: 1,
+        autoAlpha: 0,
+        rotate: -45,
+        ease: "power1.inOut",
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: ".trigger",
+          start: "top top",
+          end: "center bottom",
+        },
       });
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -31,70 +75,83 @@ export default function Closure() {
       });
 
       tl.from(".part1", {
-        x: "210%",
-        y: "220%",
-        rotate: "-95deg",
+        x: "-10%",
+        y: "10%",
+        rotate: "56deg",
       })
         .from(
           ".part2",
           {
-            x: "-110%",
-            y: "420%",
-            rotate: "85deg",
+            x: "10%",
+            rotate: "20deg",
           },
           "<",
         )
         .from(
           ".part3",
           {
-            x: "310%",
-            y: "-50%",
-            rotate: "-105deg",
+            x: "-50%",
+            y: "20%",
+            rotate: "-45deg",
           },
           "<",
         )
         .from(
           ".part4",
           {
-            x: "-210%",
-            y: "-50%",
-            rotate: "55deg",
+            x: "70%",
+            y: "-10%",
+            rotate: "45deg",
           },
           "<",
         )
         .from(
           ".part5",
           {
-            x: "50%",
-            y: "-250%",
-            rotate: "55deg",
+            x: "60%",
+            y: "-100%",
           },
           "<",
         )
         .from(
           ".part6",
           {
-            x: "-250%",
-            y: "50%",
-            rotate: "35deg",
+            x: "-20%",
+            y: "10%",
+            rotate: "42deg",
           },
           "<",
         )
         .from(
           ".part7",
           {
-            x: "-150%",
-            y: "-150%",
-            rotate: "-155deg",
+            y: "35%",
+            rotate: "76deg",
           },
           "<",
         )
         .from(
           ".part8",
           {
-            x: "150%",
-            y: "150%",
-            rotate: "-35deg",
+            x: "-5%",
+            y: "-5%",
+            rotate: "26deg",
+          },
+          "<",
+        )
+        .from(
+          ".part9",
+          {
+            x: "-200%",
+            rotate: "37deg",
+          },
+          "<",
+        )
+        .from(
+          ".part10",
+          {
+            y: "-150%",
+            rotate: "48deg",
           },
           "<",
         );
@@ -105,7 +162,7 @@ export default function Closure() {
     <div
       ref={panel}
       id="section3"
-      className={`panel bg-[#EE964B] shadow-[0_0_30px_0_rgba(0,0,0,0.25)]`}
+      className={`panel bg-green shadow-[0_0_30px_0_rgba(0,0,0,0.25)]`}
       style={{
         transformStyle: "preserve-3d",
         transform: "perspective(240px) rotateX(1deg)",
@@ -114,73 +171,64 @@ export default function Closure() {
     >
       <div className="trigger !mx-auto h-[300vh]">
         <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start">
-          <h2 className="title my-[3vw] text-center text-[4vw] text-black">
-            2. Closure
-          </h2>
-          <div className="cube">
-            <div className="row ml-[130px] flex justify-start gap-[116px]">
-              <Image
-                src="/closure/1.svg"
-                alt="Part of cube"
-                width={130}
-                height={130}
-                className="part1"
-              />
-              <Image
-                src="/closure/2.svg"
-                alt="Part of cube"
-                width={130}
-                height={130}
-                className="part2"
-              />
-            </div>
-            <div className="row flex justify-start gap-[116px]">
-              <Image
-                src="/closure/3.svg"
-                alt="Part of cube"
-                width={130}
-                height={130}
-                className="part3"
-              />
-              <Image
-                src="/closure/4.svg"
-                alt="Part of cube"
-                width={130}
-                height={130}
-                className="part4"
-              />
-            </div>
-            <div className="row ml-[130px] flex justify-start gap-[116px]">
-              <Image
-                src="/closure/5.svg"
-                alt="Part of cube"
-                width={130}
-                height={130}
-                className="part5"
-              />
-              <Image
-                src="/closure/6.svg"
-                alt="Part of cube"
-                width={130}
-                height={130}
-                className="part6"
-              />
-            </div>
-            <div className="row flex justify-start gap-[116px]">
-              <Image
-                src="/closure/7.svg"
-                alt="Part of cube"
-                width={130}
-                height={130}
-                className="part7"
-              />
-              <Image
-                src="/closure/8.svg"
-                alt="Part of cube"
-                width={130}
-                height={130}
-                className="part8"
-              />
+          <div className="container py-[3.5rem]">
+            <div className="mx-auto flex h-full w-10/12 justify-between">
+              <div className="relative grid w-[30%] grid-cols-2 grid-rows-4 gap-[2rem]">
+                {Array.from({ length: 8 }).map((_, index) => (
+                  <Image
+                    src={`/closure/part${index + 1}.svg`}
+                    alt="Closure part"
+                    width={192}
+                    height={192}
+                    key={index}
+                    className={`part${index + 1}`}
+                  />
+                ))}
+                <Image
+                  src={`/closure/part9.svg`}
+                  alt="Closure part"
+                  width={92}
+                  height={140}
+                  className="part9 absolute bottom-[25%] left-[20%] h-auto w-[22%] max-w-none"
+                />
+                <Image
+                  src={`/closure/part10.svg`}
+                  alt="Closure part"
+                  width={92}
+                  height={140}
+                  className="part10 absolute bottom-[25%] right-[20%] h-auto w-[22%] max-w-none"
+                />
+              </div>
+              <div className="flex h-full w-1/2 flex-col justify-center">
+                <h2 className="title heading-2 mb-[2rem]">Closure</h2>
+                <p className="subtitle heading-3 mb-[1.5rem]">
+                  A visual improv session that never fails to mesmerize!
+                </p>
+                <p className="paragraph mb-[2rem]">
+                  Imagine an unfinished melody where your mind fills in the
+                  notes, a tune completed by imagination. That's the principle
+                  of closure—a psychological jazz riff where the mind swings to
+                  fill the gaps. We see part of a shape, and bam, our brains bop
+                  to complete the rest.
+                </p>
+                <p className="paragraph">
+                  A few strokes of a pen can suggest a circle, a triangle, or a
+                  face. It's this interplay between the seen and the unseen that
+                  makes closure so groovy.
+                </p>
+                <div className="mt-[4rem] flex justify-end gap-[1rem]">
+                  {Array.from({ length: 3 }).map((_, index) => (
+                    <Image
+                      src={`/closure/object${index + 1}.svg`}
+                      alt="objects"
+                      width={126}
+                      height={126}
+                      className="objects"
+                      key={index}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>

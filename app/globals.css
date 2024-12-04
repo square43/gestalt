@@ -3,28 +3,100 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --red: #cf4f24;
+  --orange: #eb7114;
+  --yellow: #ecba5d;
+  --green: #00a674;
+  --blue: #20a4ca;
+  --purple: #4b27b1;
+  --teal: #147995;
+  --white: #f8ebcb;
+  --black: #231f20;
 }
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
+html {
+  font-size: 16px;
+}
+body {
+  color: var(--white);
+  background: var(--white);
+}
+.heading-1 {
+  font-size: 8.75rem; /* 140px */
+  line-height: 1.05;
+  font-family: var(--font-pretorian);
+}
+.heading-2 {
+  font-size: 6rem; /* 96px */
+  line-height: 1.1;
+  font-family: var(--font-pretorian);
+  letter-spacing: 0.03em;
+}
+.heading-3 {
+  font-size: 2.438rem; /* 39px */
+  line-height: 1.2;
+  font-family: var(--font-grotesk);
+  letter-spacing: 0.01em;
+  font-weight: 700;
+}
+.heading-4 {
+  font-size: 1.938rem; /* 31px */
+  line-height: 1.2;
+  font-family: var(--font-grotesk);
+  font-weight: 600;
+}
+.heading-5 {
+  font-size: 1.562rem; /* 25px */
+  line-height: 1.2;
+  font-family: var(--font-grotesk);
+  font-weight: 400;
+}
+.heading-6 {
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.2;
+  font-family: var(--font-grotesk);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.paragraph {
+  font-size: 1rem; /* 16px */
+  line-height: 1.5;
+  font-family: var(--font-grotesk);
+  font-weight: 600;
+}
+.container {
+  max-width: 108rem; /* 1728px */
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
+}
 
+.imageWrap {
+  clip-path: circle(0% at 50% 77%);
+}
+.continuity-circles {
+  clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+}
+// Slider appereance
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 40px;
-  height: 40px;
+  width: 2rem;
+  height: 2rem;
   background: #f4d35e;
   cursor: pointer;
   border-radius: 50%;
+  border: 0;
+}
+.slider::-moz-range-thumb {
+  width: 2rem;
+  height: 2rem;
+  background: var(--blue);
+  cursor: pointer;
+  border-radius: 50%;
+  border: 0;
 }

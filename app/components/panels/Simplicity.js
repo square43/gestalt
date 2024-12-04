@@ -2,7 +2,6 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
-import Image from "next/image";
 
 export default function Simplicity() {
   const panel = useRef();

@@ -69,10 +69,9 @@ export default function PersistenceOfVision() {
 
           <div className="mt-[3vw] flex gap-[20px] rounded-[20px] bg-white p-[20px]">
             {[
-              { label: "x2", value: 25 },
-              { label: "x1", value: 50 },
-              { label: "x0.5", value: 100 },
-              { label: "x0.25", value: 150 },
+              { label: "Slow", value: 500 },
+              { label: "12 FPS", value: 82 },
+              { label: "24 FPS", value: 41 },
             ].map(({ label, value }) => (
               <label
                 key={value}

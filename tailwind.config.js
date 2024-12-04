@@ -7,10 +7,20 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        pretorian: "var(--font-pretorian)",
+        grotesk: "var(--font-grotesk)",
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        black: "var(--foreground)",
+        red: "var(--red)",
+        orange: "var(--orange)",
+        yellow: "var(--yellow)",
+        green: "var(--green)",
+        blue: "var(--blue)",
+        purple: "var(--purple)",
+        teal: "var(--teal)",
+        white: "var(--white)",
+        black: "var(--black)",
       },
     },
   },

@@ -13,6 +13,7 @@ import Simplicity from "./panels/Simplicity";
 import Symmetry from "./panels/Symmetry";
 import PersistenceOfVision from "./panels/PersistenceOfVision";
 import Footer from "./panels/Footer";
+import FocalPoint from "./panels/FocalPoint";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,7 +76,7 @@ const Panels = () => {
   return (
     <div ref={main}>
       <div className="scroller">
-        <Welcome />
+        {/* <Welcome /> */}
         <div>
           <Similarity />
           <Closure />
@@ -84,6 +85,7 @@ const Panels = () => {
           <Simplicity />
           <Symmetry />
           <PersistenceOfVision />
+          <FocalPoint />
           <Footer />
         </div>
       </div>

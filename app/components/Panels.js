@@ -76,7 +76,7 @@ const Panels = () => {
   return (
     <div ref={main}>
       <div className="scroller">
-        {/* <Welcome /> */}
+        <Welcome />
         <div>
           <Similarity />
           <Closure />

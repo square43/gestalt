@@ -1,0 +1,13 @@
+<svg width="1160" height="871" viewBox="0 0 1160 871" fill="none" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="580" cy="831" rx="540" ry="40" fill="#147995"/>
+<rect x="85" y="153" width="990" height="674" rx="36" fill="#ECBA5D" stroke="#E69600" stroke-width="8"/>
+<path d="M81 488L354.169 766.233C364.699 776.958 379.098 783 394.129 783H765.871C780.902 783 795.301 776.958 805.831 766.233L1079 488" stroke="#231F20" stroke-width="3" stroke-linecap="round"/>
+<circle cx="286" cy="294" r="286" fill="#231F20"/>
+<circle cx="874.001" cy="294" r="286" fill="#231F20"/>
+<circle cx="389" cy="737" r="40" fill="#231F20"/>
+<circle cx="389" cy="737" r="20" fill="#E69600"/>
+<circle cx="770.001" cy="737" r="40" fill="#231F20"/>
+<circle cx="770.001" cy="737" r="20" fill="#E69600"/>
+<path d="M85 707H201C220.882 707 237 723.118 237 743V827H121C101.118 827 85 810.882 85 791V707Z" fill="#E69600" stroke="#E69600" stroke-width="8"/>
+<path d="M923 743C923 723.118 939.118 707 959 707H1075V791C1075 810.882 1058.88 827 1039 827H923V743Z" fill="#E69600" stroke="#E69600" stroke-width="8"/>
+</svg>

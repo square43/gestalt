@@ -12,6 +12,7 @@ import Figure from "./panels/Figure";
 import Simplicity from "./panels/Simplicity";
 import Symmetry from "./panels/Symmetry";
 import PersistenceOfVision from "./panels/PersistenceOfVision";
+import Footer from "./panels/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,7 +30,7 @@ const Panels = () => {
           start: "top top",
           end: "bottom top",
           scrub: true,
-          pin: true,
+          pin: i != panels.length - 1,
           pinSpacing: false,
         });
 
@@ -43,7 +44,6 @@ const Panels = () => {
             {
               scale: 1,
               borderRadius: "0px",
-
               rotateX: "0",
               ease: "power1.inOut",
               scrollTrigger: {
@@ -80,12 +80,14 @@ const Panels = () => {
           <Similarity />
           <Closure />
           <Continuity />
-          {/* <Figure /> */}
-          {/* <Simplicity /> */}
-          {/* <Symmetry /> */}
-          {/* <PersistenceOfVision /> */}
+          <Figure />
+          <Simplicity />
+          <Symmetry />
+          <PersistenceOfVision />
+          <Footer />
         </div>
       </div>
+
       {/* <Nav
         principles={[
           { color: "bg-[#28AFB0]", name: "" },

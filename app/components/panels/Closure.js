@@ -11,7 +11,7 @@ export default function Closure() {
       const title = new SplitType("#section3 .title", { types: "chars" });
       const subtitle = new SplitType("#section3 .subtitle", { types: "words" });
       const paragraph = new SplitType("#section3 .paragraph", {
-        types: "lines",
+        types: "words",
       });
       gsap.set(title.chars, {
         transformOrigin: "bottom",
@@ -19,7 +19,7 @@ export default function Closure() {
       gsap.set(subtitle.words, {
         transformOrigin: "bottom",
       });
-      gsap.set(paragraph.lines, {
+      gsap.set(paragraph.words, {
         transformOrigin: "bottom",
       });
       gsap.from(title.chars, {
@@ -43,7 +43,7 @@ export default function Closure() {
         stagger: 0.1,
         ease: "elastic.out(1.2,1)",
       });
-      gsap.from(paragraph.lines, {
+      gsap.from(paragraph.words, {
         delay: 1,
         scaleY: 0,
         scrollTrigger: {
@@ -51,7 +51,7 @@ export default function Closure() {
           start: "top top",
           end: "center bottom",
         },
-        stagger: 0.1,
+        stagger: 0.01,
       });
       gsap.from(".objects", {
         delay: 1,
@@ -172,8 +172,8 @@ export default function Closure() {
       <div className="trigger !mx-auto h-[300vh]">
         <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start">
           <div className="container py-[3.5rem]">
-            <div className="mx-auto flex h-full w-10/12 justify-between">
-              <div className="relative grid w-[30%] grid-cols-2 grid-rows-4 gap-[2rem]">
+            <div className="mx-auto flex h-full w-10/12 items-center justify-between">
+              <div className="relative flex w-[30%] flex-wrap items-center justify-center gap-[2rem]">
                 {Array.from({ length: 8 }).map((_, index) => (
                   <Image
                     src={`/closure/part${index + 1}.svg`}
@@ -181,7 +181,7 @@ export default function Closure() {
                     width={192}
                     height={192}
                     key={index}
-                    className={`part${index + 1}`}
+                    className={`part${index + 1} w-[calc(50%-2rem)]`}
                   />
                 ))}
                 <Image

@@ -6,6 +6,7 @@
   --red: #cf4f24;
   --orange: #eb7114;
   --yellow: #ecba5d;
+  --ochre: #e69600;
   --green: #00a674;
   --blue: #20a4ca;
   --purple: #4b27b1;
@@ -21,6 +22,12 @@
 html {
   font-size: 16px;
 }
+@media (max-width: 1920px) {
+  html {
+    font-size: 0.83vw;
+  }
+}
+
 body {
   color: var(--white);
   background: var(--white);
@@ -61,6 +68,7 @@ body {
   font-family: var(--font-grotesk);
   font-weight: 700;
   letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 .paragraph {
   font-size: 1rem; /* 16px */
@@ -73,6 +81,8 @@ body {
   width: 100%;
   margin: 0 auto;
   height: 100%;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 .imageWrap {
@@ -82,12 +92,15 @@ body {
   clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
 }
 // Slider appereance
+.slider {
+  -webkit-appearance: none;
+}
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 2rem;
   height: 2rem;
-  background: #f4d35e;
+  background: var(--blue);
   cursor: pointer;
   border-radius: 50%;
   border: 0;

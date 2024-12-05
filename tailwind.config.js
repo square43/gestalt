@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      animation: {
+        "spin-slow": "spin 5s linear infinite",
+      },
       fontFamily: {
         pretorian: "var(--font-pretorian)",
         grotesk: "var(--font-grotesk)",
@@ -15,6 +18,7 @@ module.exports = {
         red: "var(--red)",
         orange: "var(--orange)",
         yellow: "var(--yellow)",
+        ochre: "var(--ochre)",
         green: "var(--green)",
         blue: "var(--blue)",
         purple: "var(--purple)",
@@ -22,6 +26,11 @@ module.exports = {
         white: "var(--white)",
         black: "var(--black)",
       },
+    },
+    screens: {
+      "2xl": { max: "1600px" },
+      md: { max: "767px" },
+      sm: { max: "490px" },
     },
   },
   plugins: [],

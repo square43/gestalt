@@ -16,7 +16,7 @@ export default function Continuity() {
       const title = new SplitType("#section4 .title", { types: "chars" });
       const subtitle = new SplitType("#section4 .subtitle", { types: "words" });
       const paragraph = new SplitType("#section4 .paragraph", {
-        types: "lines",
+        types: "words",
       });
       gsap.set(title.chars, {
         transformOrigin: "bottom",
@@ -24,7 +24,7 @@ export default function Continuity() {
       gsap.set(subtitle.words, {
         transformOrigin: "bottom",
       });
-      gsap.set(paragraph.lines, {
+      gsap.set(paragraph.words, {
         transformOrigin: "bottom",
       });
       gsap.from(title.chars, {
@@ -48,7 +48,7 @@ export default function Continuity() {
         stagger: 0.1,
         ease: "elastic.out(1.2,1)",
       });
-      gsap.from(paragraph.lines, {
+      gsap.from(paragraph.words, {
         delay: 1,
         scaleY: 0,
         scrollTrigger: {
@@ -56,7 +56,7 @@ export default function Continuity() {
           start: "top top",
           end: "center bottom",
         },
-        stagger: 0.1,
+        stagger: 0.01,
       });
 
       gsap.to(".continuity-circles", {
@@ -147,10 +147,11 @@ export default function Continuity() {
             </div>
           </div>
           {/* Treba srediti lottie */}
-          <div className="h-[100px]">
+          <div className="absolute bottom-0 h-[18.75rem] w-full">
             <DotLottieReact
               dotLottieRefCallback={dotLottieRefCallback}
-              src="/continuity/notes.json"
+              src="/continuity/notes-new.json"
+              className="pointer-events-none absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2"
             />
           </div>
         </div>

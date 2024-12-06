@@ -27,6 +27,11 @@ html {
     font-size: 0.83vw;
   }
 }
+@media (max-height: 800px) {
+  html {
+    font-size: 1.6vh;
+  }
+}
 
 body {
   color: var(--white);

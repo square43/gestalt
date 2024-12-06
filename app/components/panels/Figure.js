@@ -170,21 +170,21 @@ export default function Figure() {
                     alt="objects"
                     width={100}
                     height={160}
-                    className="objects"
+                    className="objects h-auto w-[6.25rem]"
                   />
                   <Image
                     src={`/figure/small-blue.svg`}
                     alt="objects"
                     width={100}
                     height={160}
-                    className="objects"
+                    className="objects h-auto w-[6.25rem]"
                   />
                   <Image
                     src={`/figure/small-red.svg`}
                     alt="objects"
                     width={100}
                     height={160}
-                    className="objects"
+                    className="objects h-auto w-[6.25rem]"
                   />
                 </div>
               </div>

@@ -1,10 +1,59 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import SplitType from "split-type";
 
 export default function Footer() {
+  const footer = useRef();
+  useGSAP(
+    () => {
+      const title = new SplitType("#footer .title", {
+        types: ["chars", "words"],
+      });
+
+      const paragraph = new SplitType("#footer .paragraph", {
+        types: "words",
+      });
+      gsap.set(title.chars, {
+        transformOrigin: "bottom",
+      });
+
+      gsap.set(paragraph.words, {
+        transformOrigin: "bottom",
+      });
+      gsap.from(title.chars, {
+        scaleY: 0,
+        scrollTrigger: {
+          trigger: ".trigger",
+          start: "top center",
+          end: "bottom center",
+        },
+        stagger: 0.1,
+        ease: "elastic.out(1.2,1)",
+      });
+
+      gsap.from(paragraph.words, {
+        delay: 1,
+        scaleY: 0,
+        scrollTrigger: {
+          trigger: ".trigger",
+          start: "top center",
+          end: "bottom center",
+        },
+        stagger: 0.01,
+      });
+    },
+    { scope: footer },
+  );
   return (
-    <div className="relative z-[100] bg-gradient-to-b from-[#147995] to-[#20A4CA] py-[5rem]">
-      <div className="container">
+    <div
+      id="footer"
+      ref={footer}
+      className="relative z-[100] bg-gradient-to-b from-[#147995] to-[#20A4CA] py-[5rem]"
+    >
+      <div className="trigger container">
         <div className="mx-auto flex w-2/3 flex-col items-center">
           <h2 className="title heading-2 mb-[2rem] text-center">
             ...And many more!
@@ -36,14 +85,14 @@ export default function Footer() {
               alt="Real"
               width={572}
               height={572}
-              className="animate-spin-slow absolute left-0 top-0 h-[65.6%] w-[49.3%]"
+              className="absolute left-0 top-0 h-[65.6%] w-[49.3%] animate-spin-slow"
             />
             <Image
               src="/footer/real.svg"
               alt="Real"
               width={572}
               height={572}
-              className="animate-spin-slow absolute right-0 top-0 h-[65.6%] w-[49.3%]"
+              className="absolute right-0 top-0 h-[65.6%] w-[49.3%] animate-spin-slow"
             />
             <Link
               href="https://lab.square43.com"
@@ -69,15 +118,25 @@ export default function Footer() {
               <Link
                 href="https://www.instagram.com/square43studio/"
                 target="_blank"
+                className="relative"
               >
                 <Image
                   src="/footer/instagram.svg"
                   alt="instagram"
                   width={32}
                   height={32}
+                  className="h-auto w-[2rem]"
+                />
+                <Image
+                  src="/footer/instagramY.svg"
+                  alt="instagram"
+                  width={32}
+                  height={32}
+                  className="absolute left-0 top-0 h-auto w-[2rem] opacity-0 transition duration-500 hover:opacity-100"
                 />
               </Link>
               <Link
+                className="relative"
                 href="https://www.linkedin.com/company/square43"
                 target="_blank"
               >
@@ -86,14 +145,34 @@ export default function Footer() {
                   alt="linkedin"
                   width={32}
                   height={32}
+                  className="h-auto w-[2rem]"
+                />
+                <Image
+                  src="/footer/linkedinY.svg"
+                  alt="instagram"
+                  width={32}
+                  height={32}
+                  className="absolute left-0 top-0 h-auto w-[2rem] opacity-0 transition duration-500 hover:opacity-100"
                 />
               </Link>
-              <Link href="mailto:studio@square43.com" target="_blank">
+              <Link
+                className="relative"
+                href="mailto:studio@square43.com"
+                target="_blank"
+              >
                 <Image
                   src="/footer/mail.svg"
                   alt="mail"
                   width={32}
                   height={32}
+                  className="h-auto w-[2rem]"
+                />
+                <Image
+                  src="/footer/mailY.svg"
+                  alt="instagram"
+                  width={32}
+                  height={32}
+                  className="absolute left-0 top-0 h-auto w-[2rem] opacity-0 transition duration-500 hover:opacity-100"
                 />
               </Link>
             </div>

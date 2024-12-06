@@ -137,6 +137,7 @@ export default function Simplicity() {
                       alt="Carret icon"
                       width={36}
                       height={36}
+                      className="h-auto w-[2.25rem]"
                     />
                   </div>
                   <Saxophone />

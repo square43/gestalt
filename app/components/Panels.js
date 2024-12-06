@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -19,53 +19,69 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Panels = () => {
   const main = useRef();
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1100);
+    };
 
+    // Check initial width
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   useGSAP(
     () => {
       const panels = gsap.utils.toArray(".panel");
       const dots = gsap.utils.toArray(".dot");
 
       panels.forEach((panel, i) => {
-        ScrollTrigger.create({
-          trigger: panel,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-          pin: i != panels.length - 1,
-          pinSpacing: false,
-        });
+        if (window && window.innerWidth > 1100) {
+          ScrollTrigger.create({
+            trigger: panel,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+            pin: i != panels.length - 1,
+            pinSpacing: false,
+          });
 
-        if (i != 0) {
-          gsap.fromTo(
-            panel,
-            {
-              scale: 0.8,
-              borderRadius: "150px",
-            }, // starting state
-            {
-              scale: 1,
-              borderRadius: "0px",
-              rotateX: "0",
-              ease: "power1.inOut",
-              scrollTrigger: {
-                trigger: panel,
-                start: "-33.33% top",
-                end: "top top",
-                scrub: true,
+          if (i != 0) {
+            gsap.fromTo(
+              panel,
+              {
+                scale: 0.8,
+                borderRadius: "150px",
+              }, // starting state
+              {
+                scale: 1,
+                borderRadius: "0px",
+                rotateX: "0",
+                ease: "power1.inOut",
+                scrollTrigger: {
+                  trigger: panel,
+                  start: "-33.33% top",
+                  end: "top top",
+                  scrub: true,
+                },
               },
-            },
-          );
-          if (dots[i]) {
-            gsap.to(dots[i], {
-              scale: 1,
-              ease: "none",
-              scrollTrigger: {
-                trigger: panels[i],
-                start: "-100% top",
-                end: "top top",
-                scrub: true,
-              },
-            });
+            );
+            if (dots[i]) {
+              gsap.to(dots[i], {
+                scale: 1,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: panels[i],
+                  start: "-100% top",
+                  end: "top top",
+                  scrub: true,
+                },
+              });
+            }
           }
         }
       });
@@ -78,8 +94,8 @@ const Panels = () => {
       <div className="scroller">
         <Welcome />
         <div>
-          <Similarity />
-          <Closure />
+          <Similarity isMobile={isMobile} />
+          <Closure isMobile={isMobile} />
           <Continuity />
           <Figure />
           <Simplicity />

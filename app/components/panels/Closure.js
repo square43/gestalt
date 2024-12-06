@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import SplitType from "split-type";
 
-export default function Closure() {
+export default function Closure({ isMobile }) {
   const panel = useRef();
   useGSAP(
     () => {
@@ -164,13 +164,13 @@ export default function Closure() {
       id="section3"
       className={`panel bg-green shadow-[0_0_30px_0_rgba(0,0,0,0.25)]`}
       style={{
-        transformStyle: "preserve-3d",
-        transform: "perspective(240px) rotateX(1deg)",
-        transformOrigin: "top",
+        transformStyle: !isMobile && "preserve-3d",
+        transform: !isMobile && "perspective(240px) rotateX(1deg)",
+        transformOrigin: !isMobile && "top",
       }}
     >
-      <div className="trigger !mx-auto h-[300vh]">
-        <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start">
+      <div className="trigger lg:h-auto !mx-auto h-[300vh]">
+        <div className="lg:static lg:h-full sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start">
           <div className="container py-[3.5rem]">
             <div className="mx-auto flex h-full w-10/12 items-center justify-between">
               <div className="relative flex w-[30%] flex-wrap items-center justify-center gap-[2rem]">
@@ -223,7 +223,7 @@ export default function Closure() {
                       alt="objects"
                       width={126}
                       height={126}
-                      className="objects"
+                      className="objects h-auto w-[7.875rem]"
                       key={index}
                     />
                   ))}

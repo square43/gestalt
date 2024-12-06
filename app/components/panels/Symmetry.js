@@ -217,6 +217,7 @@ export default function Symmetry() {
                       alt="Carret left"
                       width={36}
                       height={36}
+                      className="h-auto w-[2.25rem]"
                     />
                     Hover to move the records!
                   </div>
@@ -227,21 +228,21 @@ export default function Symmetry() {
                         alt="circles"
                         width={276}
                         height={106}
-                        className="circle"
+                        className="circle h-auto w-[17.25rem]"
                       />
                       <Image
                         src="/symmetry/blue.svg"
                         alt="circles"
                         width={369}
                         height={106}
-                        className="circle my-[-5rem]"
+                        className="circle my-[-5rem] h-auto w-[23.063rem]"
                       />
                       <Image
                         src="/symmetry/white.svg"
                         alt="circles"
                         width={276}
                         height={106}
-                        className="circle"
+                        className="circle h-auto w-[17.25rem]"
                       />
                       <div className="absolute left-1/2 top-0 h-full w-[3px] -translate-x-1/2 bg-teal"></div>
                     </div>

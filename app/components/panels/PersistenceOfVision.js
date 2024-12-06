@@ -139,7 +139,7 @@ export default function PersistenceOfVision() {
               </div>
             </div>
             <div className="flex w-1/2 flex-col items-center">
-              <div className="w-[40vw] overflow-hidden">
+              <div className="overflow-hidden">
                 <Image
                   ref={image}
                   src={`/persistence-of-vision/sprite.png`}

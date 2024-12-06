@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
 import Image from "next/image";
 
-export default function Similarity() {
+export default function Similarity({ isMobile }) {
   const panel = useRef();
   useGSAP(
     () => {
@@ -87,16 +87,16 @@ export default function Similarity() {
       id="section2"
       className={`panel bg-teal shadow-[0_0_30px_0_rgba(0,0,0,0.25)]`}
       style={{
-        transformStyle: "preserve-3d",
-        transform: "perspective(240px) rotateX(1deg)",
-        transformOrigin: "top",
+        transformStyle: !isMobile && "preserve-3d",
+        transform: !isMobile && "perspective(240px) rotateX(1deg)",
+        transformOrigin: !isMobile && "top",
       }}
     >
-      <div className="trigger !mx-auto h-[300vh]">
-        <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start">
-          <div className="container py-[3.5rem]">
-            <div className="mx-auto flex h-full w-10/12 flex-col justify-start gap-[4.688rem]">
-              <div className="flex w-full justify-between gap-[1rem]">
+      <div className="trigger lg:h-auto !mx-auto h-[300vh]">
+        <div className="lg:static lg:h-full sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start">
+          <div className="lg:pb-[6.786rem] container py-[3.5rem] pt-[4.571rem]">
+            <div className="lg:w-full mx-auto flex h-full w-10/12 flex-col justify-start gap-[4.688rem]">
+              <div className="lg:gap-[0.347rem] flex w-full justify-between gap-[1rem]">
                 {Array.from({ length: 14 }).map((_, index) => (
                   <div key={index} className="relative">
                     <Image
@@ -104,6 +104,7 @@ export default function Similarity() {
                       alt="piano tile"
                       width={93.55}
                       height={325}
+                      className="lg:w-[]"
                     />
                     {index % 2 == 0 && (
                       <Image
@@ -117,8 +118,8 @@ export default function Similarity() {
                   </div>
                 ))}
               </div>
-              <div className="flex w-full justify-between">
-                <div className="w-1/2">
+              <div className="lg:flex-col lg:gap-[4rem] flex w-full justify-between">
+                <div className="lg:w-full w-1/2">
                   <h2 className="title heading-2 mb-[2rem]">Similarity</h2>
                   <p className="subtitle heading-3 mb-[1.5rem]">
                     It's a groove we can't resist! It simplifies complexity.
@@ -138,14 +139,24 @@ export default function Similarity() {
                     same ensemble.
                   </p>
                 </div>
-                <div className="flex w-2/5 flex-col justify-end gap-[1rem]">
+                <div className="lg:w-full flex w-2/5 flex-col justify-end gap-[1rem]">
                   {Array.from({ length: 5 }).map((_, index) => (
                     <Image
                       src={`/similarity/${index % 2 == 0 ? "white.svg" : "blue.svg"}`}
                       alt="Circles"
                       width={544}
                       height={40}
-                      className="circles"
+                      className="circles lg:hidden"
+                      key={index}
+                    />
+                  ))}
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <Image
+                      src={`/similarity/${index % 2 == 0 ? "whiteM.svg" : "blueM.svg"}`}
+                      alt="Circles"
+                      width={704}
+                      height={88}
+                      className="circles lg:block hidden h-auto w-full max-w-none"
                       key={index}
                     />
                   ))}

@@ -136,7 +136,7 @@ export default function FocalPoint() {
                     alt="Decorative object"
                     width={224}
                     height={224}
-                    className="relative"
+                    className="relative h-auto w-[14rem]"
                   />
                 </div>
               </div>

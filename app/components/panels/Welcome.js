@@ -117,11 +117,11 @@ export default function Welcome() {
               <div className="absolute left-1/2 top-1/2 z-[2] flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center">
                 <h1 className="title heading-1 text-center">Perception</h1>
                 <h1 className="title heading-1 text-center">Playhouse</h1>
-                <p className="subtitle heading-3 mt-[2rem] text-center">
+                <p className="subtitle heading-3 lg:max-w-[32.857rem] mt-[2rem] text-center">
                   A mixtape of visual quirks and principles!
                 </p>
               </div>
-              <div className="imageWrap relative">
+              <div className="imageWrap lg:w-[97.857rem] lg:h-[63.929rem] lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:bottom-0 relative">
                 <div className="absolute bottom-[4.3%] left-1/2 z-[0] h-[12%] w-[27%] -translate-x-1/2">
                   <div ref={eyes} className="relative h-full w-full bg-white">
                     <div className="left-eye absolute left-[14.3%] top-1/2 h-[53%] w-[15.5%] -translate-y-1/2 rounded-full bg-gradient-to-b from-[#02260C] to-[#00A674]"></div>

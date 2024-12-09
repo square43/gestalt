@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
 
-export default function Footer() {
+export default function Footer({ isMobile }) {
   const footer = useRef();
   useGSAP(
     () => {
@@ -54,11 +54,11 @@ export default function Footer() {
       className="relative z-[100] bg-gradient-to-b from-[#147995] to-[#20A4CA] py-[5rem]"
     >
       <div className="trigger container">
-        <div className="mx-auto flex w-2/3 flex-col items-center">
+        <div className="mx-auto flex w-2/3 flex-col items-center lg:w-full">
           <h2 className="title heading-2 mb-[2rem] text-center">
             ...And many more!
           </h2>
-          <div className="w-3/4">
+          <div className="w-3/4 lg:w-2/3">
             <p className="paragraph mb-[2rem]">
               The world of visual principles stretches far beyond the few we've
               explored here. The world is brimming with visual
@@ -96,7 +96,7 @@ export default function Footer() {
             />
             <Link
               href="https://lab.square43.com"
-              className="heading-6 absolute bottom-[22.3%] left-1/2 flex -translate-x-1/2 items-center gap-[1rem] rounded-full bg-black p-[1rem] pr-[1.5rem] transition duration-500 hover:bg-white hover:text-black"
+              className="heading-6 absolute bottom-[22.3%] left-1/2 flex -translate-x-1/2 items-center gap-[1rem] rounded-full bg-black p-[1rem] pr-[1.5rem] transition duration-500 hover:bg-white hover:text-black lg:bottom-[20%] lg:p-[0.5rem] lg:pr-[1rem]"
             >
               <Image
                 src="/footer/buttonIcon.svg"
@@ -109,11 +109,26 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-        <footer className="container flex justify-between gap-[1.25rem] pt-[2rem]">
-          <div className="w-1/6">
+        <footer className="container flex justify-between gap-[1.25rem] pt-[2rem] lg:flex-col">
+          <div className="w-1/6 lg:flex lg:w-full lg:justify-between">
             <Image src="/footer/logo.svg" alt="Logo" width={271} height={93} />
+            <Link
+              href="https://square43.com"
+              target="_blank"
+              className="hidden lg:block"
+            >
+              <Image
+                src="/footer/square-logo.svg"
+                alt="Logo"
+                width={271}
+                height={95}
+              />
+            </Link>
           </div>
-          <div className="flex w-1/6 flex-col items-center justify-center">
+          <div className="flex w-1/6 flex-col items-center justify-center lg:w-full lg:flex-row lg:items-end lg:justify-between">
+            <p className="paragraph hidden text-center lg:block">
+              ©MMXXIV &#8226; Square43 Studio
+            </p>
             <div className="flex gap-[1rem]">
               <Link
                 href="https://www.instagram.com/square43studio/"
@@ -125,14 +140,14 @@ export default function Footer() {
                   alt="instagram"
                   width={32}
                   height={32}
-                  className="h-auto w-[2rem]"
+                  className="h-auto w-[2rem] lg:w-[3.429rem]"
                 />
                 <Image
                   src="/footer/instagramY.svg"
                   alt="instagram"
                   width={32}
                   height={32}
-                  className="absolute left-0 top-0 h-auto w-[2rem] opacity-0 transition duration-500 hover:opacity-100"
+                  className="absolute left-0 top-0 h-auto w-[2rem] opacity-0 transition duration-500 hover:opacity-100 lg:w-[3.429rem]"
                 />
               </Link>
               <Link
@@ -145,14 +160,14 @@ export default function Footer() {
                   alt="linkedin"
                   width={32}
                   height={32}
-                  className="h-auto w-[2rem]"
+                  className="h-auto w-[2rem] lg:w-[3.429rem]"
                 />
                 <Image
                   src="/footer/linkedinY.svg"
                   alt="instagram"
                   width={32}
                   height={32}
-                  className="absolute left-0 top-0 h-auto w-[2rem] opacity-0 transition duration-500 hover:opacity-100"
+                  className="absolute left-0 top-0 h-auto w-[2rem] opacity-0 transition duration-500 hover:opacity-100 lg:w-[3.429rem]"
                 />
               </Link>
               <Link
@@ -165,19 +180,19 @@ export default function Footer() {
                   alt="mail"
                   width={32}
                   height={32}
-                  className="h-auto w-[2rem]"
+                  className="h-auto w-[2rem] lg:w-[3.429rem]"
                 />
                 <Image
                   src="/footer/mailY.svg"
                   alt="instagram"
                   width={32}
                   height={32}
-                  className="absolute left-0 top-0 h-auto w-[2rem] opacity-0 transition duration-500 hover:opacity-100"
+                  className="absolute left-0 top-0 h-auto w-[2rem] opacity-0 transition duration-500 hover:opacity-100 lg:w-[3.429rem]"
                 />
               </Link>
             </div>
           </div>
-          <div className="w-1/6">
+          <div className="w-1/6 lg:hidden">
             <Link href="https://square43.com" target="_blank">
               <Image
                 src="/footer/square-logo.svg"
@@ -188,7 +203,7 @@ export default function Footer() {
             </Link>
           </div>
         </footer>
-        <p className="paragraph mt-[1.5rem] text-center">
+        <p className="paragraph mt-[1.5rem] text-center lg:hidden">
           ©MMXXIV &#8226; Square43 Studio
         </p>
       </div>

@@ -37,8 +37,8 @@ export default function Closure({ isMobile }) {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.1,
         ease: "elastic.out(1.2,1)",
@@ -48,8 +48,8 @@ export default function Closure({ isMobile }) {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.01,
       });
@@ -61,15 +61,15 @@ export default function Closure({ isMobile }) {
         stagger: 0.2,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
       });
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "65% bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "center center" : "65% bottom",
           scrub: true,
         },
       });
@@ -162,18 +162,18 @@ export default function Closure({ isMobile }) {
     <div
       ref={panel}
       id="section3"
-      className={`panel bg-green shadow-[0_0_30px_0_rgba(0,0,0,0.25)]`}
+      className={`panel bg-green shadow-[0_0_30px_0_rgba(0,0,0,0.25)] lg:shadow-none`}
       style={{
-        transformStyle: !isMobile && "preserve-3d",
-        transform: !isMobile && "perspective(240px) rotateX(1deg)",
-        transformOrigin: !isMobile && "top",
+        transformStyle: isMobile && "preserve-3d",
+        transform: isMobile && "perspective(240px) rotateX(1deg)",
+        transformOrigin: isMobile && "top",
       }}
     >
-      <div className="trigger lg:h-auto !mx-auto h-[300vh]">
-        <div className="lg:static lg:h-full sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start">
+      <div className="trigger !mx-auto h-[300vh] lg:h-auto">
+        <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start lg:static lg:h-full">
           <div className="container py-[3.5rem]">
-            <div className="mx-auto flex h-full w-10/12 items-center justify-between">
-              <div className="relative flex w-[30%] flex-wrap items-center justify-center gap-[2rem]">
+            <div className="mx-auto flex h-full w-10/12 items-center justify-between lg:w-full lg:gap-[1.25rem]">
+              <div className="relative flex w-[30%] flex-wrap items-center justify-center gap-[2rem] lg:w-1/2">
                 {Array.from({ length: 8 }).map((_, index) => (
                   <Image
                     src={`/closure/part${index + 1}.svg`}
@@ -216,7 +216,7 @@ export default function Closure({ isMobile }) {
                   face. It's this interplay between the seen and the unseen that
                   makes closure so groovy.
                 </p>
-                <div className="mt-[4rem] flex justify-end gap-[1rem]">
+                <div className="mt-[4rem] flex justify-end gap-[1rem] lg:hidden">
                   {Array.from({ length: 3 }).map((_, index) => (
                     <Image
                       src={`/closure/object${index + 1}.svg`}
@@ -229,6 +229,18 @@ export default function Closure({ isMobile }) {
                   ))}
                 </div>
               </div>
+            </div>
+            <div className="mt-[3.214rem] hidden w-full justify-center gap-[4.286rem] lg:flex">
+              {Array.from({ length: 3 }).map((_, index) => (
+                <Image
+                  src={`/closure/object${index + 1}.svg`}
+                  alt="objects"
+                  width={126}
+                  height={126}
+                  className="objects h-auto w-[11.429rem]"
+                  key={index}
+                />
+              ))}
             </div>
           </div>
         </div>

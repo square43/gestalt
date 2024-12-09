@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
 import Image from "next/image";
 
-export default function PersistenceOfVision() {
+export default function PersistenceOfVision({ isMobile }) {
   const panel = useRef();
   const image = useRef();
   const [frame, setFrame] = useState(0);
@@ -42,8 +42,8 @@ export default function PersistenceOfVision() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.1,
         ease: "elastic.out(1.2,1)",
@@ -53,8 +53,8 @@ export default function PersistenceOfVision() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.1,
         ease: "elastic.out(1.2,1)",
@@ -64,22 +64,36 @@ export default function PersistenceOfVision() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.01,
       });
-      gsap.from(".circles", {
-        delay: 1,
-        autoAlpha: 0,
-        x: "-7.5rem",
-        scrollTrigger: {
-          trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
-        },
-        stagger: 0.1,
-      });
+      if (isMobile) {
+        gsap.from(".circles", {
+          delay: 1,
+          autoAlpha: 0,
+          y: "-4.286rem",
+          scrollTrigger: {
+            trigger: ".trigger",
+            start: isMobile ? "top center" : "top top",
+            end: isMobile ? "bottom center" : "center bottom",
+          },
+          stagger: 0.1,
+        });
+      } else {
+        gsap.from(".circles", {
+          delay: 1,
+          autoAlpha: 0,
+          x: "-7.5rem",
+          scrollTrigger: {
+            trigger: ".trigger",
+            start: isMobile ? "top center" : "top top",
+            end: isMobile ? "bottom center" : "center bottom",
+          },
+          stagger: 0.1,
+        });
+      }
     },
     { scope: panel },
   );
@@ -88,19 +102,19 @@ export default function PersistenceOfVision() {
     <div
       ref={panel}
       id="section8"
-      className="panel bg-ochre shadow-[0_0_30px_0_rgba(0,0,0,0.25)]"
+      className="panel bg-ochre shadow-[0_0_30px_0_rgba(0,0,0,0.25)] lg:shadow-none"
       style={{
-        transformStyle: "preserve-3d",
-        transform: "perspective(240px) rotateX(1deg)",
-        transformOrigin: "top",
+        transformStyle: isMobile && "preserve-3d",
+        transform: isMobile && "perspective(240px) rotateX(1deg)",
+        transformOrigin: isMobile && "top",
       }}
     >
-      <div className="trigger !mx-auto h-[300vh]">
-        <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start">
-          <div className="container flex gap-[1.25rem] pb-[3.5rem] pt-[7.5rem]">
-            <div className="w-1/12"></div>
-            <div className="w-5/12 text-black">
-              <h2 className="title heading-2 mb-[2rem]">
+      <div className="trigger !mx-auto h-[300vh] lg:h-auto">
+        <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start lg:static lg:h-full">
+          <div className="container flex gap-[1.25rem] pb-[3.5rem] pt-[7.5rem] lg:flex-col lg:pb-[5.714rem] lg:pt-[4.571rem]">
+            <div className="w-1/12 lg:hidden"></div>
+            <div className="w-5/12 text-black lg:w-full">
+              <h2 className="title heading-2 mb-[2rem] lg:w-2/3">
                 Persistence of vision
               </h2>
               <p className="subtitle heading-3 mb-[1.5rem] w-[80%]">
@@ -124,7 +138,7 @@ export default function PersistenceOfVision() {
                 static images. It's like a jazz standard where every note builds
                 on the last, weaving a seamless melody that keeps you entranced.
               </p>
-              <div className="mt-[4rem] flex items-end">
+              <div className="mt-[4rem] flex items-end lg:hidden">
                 {Array.from({ length: 6 }).map((_, index) => (
                   <div
                     key={index}
@@ -138,24 +152,39 @@ export default function PersistenceOfVision() {
                 ))}
               </div>
             </div>
-            <div className="flex w-1/2 flex-col items-center">
-              <div className="overflow-hidden">
-                <Image
-                  ref={image}
-                  src={`/persistence-of-vision/sprite.png`}
-                  alt="Animation frame"
-                  width={15360}
-                  height={1080}
-                  className="h-auto w-[800%] max-w-none"
-                  style={{ transform: `translateX(-${frame * (100 / 8)}%)` }}
-                />
+            <div className="flex w-1/2 flex-col items-center lg:w-full">
+              <div className="lg:flex lg:items-end">
+                <div className="mt-[4rem] hidden w-1/5 flex-col items-start lg:flex">
+                  {Array.from({ length: 6 }).map((_, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        outlineWidth: `${index + 5}px`,
+                        width: `calc(4.286rem + ${index * 0.5}rem)`,
+                        height: `calc(4.286rem + ${index * 0.5}rem)`,
+                      }}
+                      className={`circles mb-[-1.786rem] rounded-full outline outline-yellow`}
+                    ></div>
+                  ))}
+                </div>
+                <div className="overflow-hidden lg:w-4/5">
+                  <Image
+                    ref={image}
+                    src={`/persistence-of-vision/sprite.png`}
+                    alt="Animation frame"
+                    width={15360}
+                    height={1080}
+                    className="h-auto w-[800%] max-w-none"
+                    style={{ transform: `translateX(-${frame * (100 / 8)}%)` }}
+                  />
+                </div>
               </div>
 
-              <div className="mt-[4rem] rounded-[2rem] bg-white px-[2rem] py-[1rem]">
-                <p className="heading-4 mb-[0.75rem] text-center uppercase text-black">
+              <div className="mt-[4rem] rounded-[2rem] bg-white px-[2rem] py-[1rem] lg:flex lg:w-full lg:items-center lg:justify-between">
+                <p className="heading-4 mb-[0.75rem] text-center uppercase text-black lg:mb-0 lg:w-1/3 lg:text-left">
                   Frames per second
                 </p>
-                <div className="flex justify-between">
+                <div className="flex justify-between lg:gap-[1.429rem]">
                   {[
                     { label: "2", value: 500 },
                     { label: "12", value: 82 },
@@ -174,10 +203,10 @@ export default function PersistenceOfVision() {
                       />
 
                       <div
-                        className={`flex h-[5rem] w-[3rem] justify-center rounded-full p-[0.5rem] transition-all duration-500 ${delay == value ? "bg-yellow" : "bg-ochre"}`}
+                        className={`flex h-[5rem] w-[3rem] justify-center rounded-full p-[0.5rem] transition-all duration-500 lg:h-[4rem] lg:w-[2.286rem] lg:p-[0.286rem] ${delay == value ? "bg-yellow" : "bg-ochre"}`}
                       >
                         <div
-                          className={`h-[2rem] w-[2rem] bg-black transition-all duration-500 ${delay === value ? "translate-y-full" : "translate-y-0"} rounded-full`}
+                          className={`h-[2rem] w-[2rem] bg-black transition-all duration-500 lg:h-[1.714rem] lg:w-[1.714rem] ${delay === value ? "translate-y-full" : "translate-y-0"} rounded-full`}
                         ></div>
                       </div>
 

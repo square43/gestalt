@@ -5,7 +5,7 @@ import SplitType from "split-type";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import Image from "next/image";
 
-export default function Continuity() {
+export default function Continuity({ isMobile }) {
   const panel = useRef();
   const sliderRef = useRef(null);
 
@@ -31,8 +31,8 @@ export default function Continuity() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.1,
         ease: "elastic.out(1.2,1)",
@@ -42,8 +42,8 @@ export default function Continuity() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.1,
         ease: "elastic.out(1.2,1)",
@@ -53,8 +53,8 @@ export default function Continuity() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.01,
       });
@@ -64,8 +64,8 @@ export default function Continuity() {
         delay: 1,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         ease: "power1.inOut",
         clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
@@ -87,19 +87,19 @@ export default function Continuity() {
     <div
       ref={panel}
       id="section4"
-      className={`panel bg-yellow shadow-[0_0_30px_0_rgba(0,0,0,0.25)]`}
+      className={`panel bg-yellow shadow-[0_0_30px_0_rgba(0,0,0,0.25)] lg:shadow-none`}
       style={{
-        transformStyle: "preserve-3d",
-        transform: "perspective(240px) rotateX(1deg)",
-        transformOrigin: "top",
+        transformStyle: isMobile && "preserve-3d",
+        transform: isMobile && "perspective(240px) rotateX(1deg)",
+        transformOrigin: isMobile && "top",
       }}
     >
-      <div className="trigger !mx-auto h-[300vh]">
-        <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start">
-          <div className="container py-[3.5rem]">
-            <div className="mx-auto flex h-full w-10/12 flex-col justify-between">
-              <div className="flex w-full justify-between">
-                <div className="w-1/2 text-black">
+      <div className="trigger !mx-auto h-[300vh] pb-[5.714rem] lg:h-auto">
+        <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start lg:relative lg:h-full">
+          <div className="container py-[3.5rem] lg:pb-[0] lg:pt-[4.571rem]">
+            <div className="mx-auto flex h-full w-10/12 flex-col justify-between lg:w-full">
+              <div className="flex w-full justify-between lg:gap-[1.25rem]">
+                <div className="w-1/2 text-black lg:w-[55%]">
                   <h2 className="title heading-2 mb-[2rem]">Continuity</h2>
                   <p className="subtitle heading-3 mb-[1.5rem]">
                     Making your eye move like a needle on a record!
@@ -118,7 +118,7 @@ export default function Continuity() {
                     the clean elegance of mid-century modern layouts, it's the
                     unbroken visual rhythm that keeps the composition tight.
                   </p>
-                  <div className="mt-[2rem] rounded-[2rem] bg-white px-[2rem] py-[1.5rem]">
+                  <div className="mt-[2rem] rounded-[2rem] bg-white px-[2rem] py-[1.5rem] lg:hidden">
                     <p className="heading-4 mb-[1rem] text-center">
                       SLIDE TO ARRANGE NOTES
                     </p>
@@ -128,31 +128,58 @@ export default function Continuity() {
                       min="1"
                       max="60"
                       step="1"
-                      defaultValue={0}
+                      defaultValue={1}
                       onInput={handleLottieChange}
                       className="slider h-[3px] w-full appearance-none rounded-full bg-black"
                     />
                   </div>
                 </div>
-                <div className="flex w-2/5 items-center gap-[1rem]">
+                <div className="flex w-2/5 items-center gap-[1rem] lg:w-1/3">
                   <Image
                     src="/continuity/circles.svg"
                     alt="Decorative object"
                     width={562}
                     height={343}
-                    className="continuity-circles"
+                    className="continuity-circles lg:hidden"
+                  />
+                  <Image
+                    src="/continuity/circlesM.svg"
+                    alt="Decorative object"
+                    width={436}
+                    height={270}
+                    className="continuity-circles hidden h-auto w-[31.143rem] lg:block"
                   />
                 </div>
               </div>
             </div>
           </div>
           {/* Treba srediti lottie */}
-          <div className="pointer-events-none absolute bottom-0 h-[18.75rem] w-full">
+          <div className="pointer-events-none absolute bottom-0 h-[18.75rem] w-full lg:pointer-events-auto lg:static lg:h-auto">
             <DotLottieReact
               dotLottieRefCallback={dotLottieRefCallback}
               src="/continuity/notes-new.json"
-              className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2"
+              className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 lg:hidden"
             />
+            <DotLottieReact
+              dotLottieRefCallback={dotLottieRefCallback}
+              src="/continuity/notes-newT.json"
+              className="pointer-events-none hidden max-h-[21.429rem] lg:block"
+            />
+            <div className="mt-[2rem] hidden rounded-[2rem] bg-white px-[2rem] py-[1.5rem] lg:mx-[1.714rem] lg:block">
+              <p className="heading-4 mb-[1rem] text-center text-black">
+                SLIDE TO ARRANGE NOTES
+              </p>
+              <input
+                ref={sliderRef}
+                type="range"
+                min="1"
+                max="60"
+                step="1"
+                defaultValue={1}
+                onInput={handleLottieChange}
+                className="slider h-[3px] w-full appearance-none rounded-full bg-black"
+              />
+            </div>
           </div>
         </div>
       </div>

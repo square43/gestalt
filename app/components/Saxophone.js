@@ -6,7 +6,7 @@ export default function Saxophone() {
       viewBox="0 0 502 822"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="saxophone h-[51.375rem] w-[31.375rem]"
+      className="saxophone h-[51.375rem] w-[31.375rem] lg:h-auto lg:w-full"
     >
       <path
         d="M450.893 13.7612L204.215 79.8583L224.169 154.328L450.893 13.7612Z"

@@ -4,7 +4,8 @@ import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
 import Image from "next/image";
 
-export default function Symmetry() {
+export default function Symmetry({ isMobile }) {
+  const sliderRef = useRef();
   const circles = useRef([]);
   const panel = useRef();
   const wrapper = useRef();
@@ -31,8 +32,8 @@ export default function Symmetry() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.1,
         ease: "elastic.out(1.2,1)",
@@ -42,8 +43,8 @@ export default function Symmetry() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.1,
         ease: "elastic.out(1.2,1)",
@@ -53,8 +54,8 @@ export default function Symmetry() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.01,
       });
@@ -64,14 +65,61 @@ export default function Symmetry() {
         y: "-20px",
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.1,
       });
     },
     { scope: panel },
   );
+
+  const updatePositions = (event) => {
+    if (wrapper) {
+      const { width, height } = wrapper.current.getBoundingClientRect();
+
+      const mappedValueX = event.target.value;
+      const mappedValueY = event.target.value;
+      const mouseOnRight = event.target.value > width / 2;
+      const mouseOnBottom = event.target.value > height / 2;
+      const intensity = 150;
+
+      const calculateOffset = (isPositive, value, strength) =>
+        isPositive
+          ? value * intensity * strength
+          : -value * intensity * strength;
+
+      circles.current.forEach((circle, index) => {
+        const strengthX =
+          parseFloat(circle.getAttribute("data-strength-x")) || 1;
+        const strengthY =
+          parseFloat(circle.getAttribute("data-strength-y")) || 1;
+
+        const isRightCircle = index % 4 >= 2;
+        const isBottomCircle = index < 8;
+
+        const offset = {
+          x: calculateOffset(
+            mouseOnRight === isRightCircle,
+            mappedValueX,
+            strengthX,
+          ),
+          y: calculateOffset(
+            mouseOnBottom === isBottomCircle,
+            mappedValueY,
+            strengthY,
+          ),
+        };
+
+        gsap.to(circle, {
+          x: offset.x,
+          y: -offset.y,
+          duration: 1,
+          ease: "power3.out",
+        });
+      });
+    }
+  };
 
   useEffect(() => {
     const updatePositions = (event) => {
@@ -121,80 +169,108 @@ export default function Symmetry() {
       }
     };
 
-    if (wrapper) {
-      // Attach the mousemove event
-      wrapper.current.addEventListener("mousemove", updatePositions);
-    }
-
-    // Cleanup event listener
-    return () => {
+    if (!isMobile) {
       if (wrapper) {
-        wrapper.current.removeEventListener("mousemove", updatePositions);
+        // Attach the mousemove event
+        wrapper.current.addEventListener("mousemove", updatePositions);
       }
-    };
+
+      // Cleanup event listener
+      return () => {
+        if (wrapper) {
+          wrapper.current.removeEventListener("mousemove", updatePositions);
+        }
+      };
+    }
   }, []);
 
   return (
     <div
       ref={panel}
       id="section7"
-      className={`panel bg-blue shadow-[0_0_30px_0_rgba(0,0,0,0.25)]`}
+      className={`panel bg-blue shadow-[0_0_30px_0_rgba(0,0,0,0.25)] lg:shadow-none`}
       style={{
-        transformStyle: "preserve-3d",
-        transform: "perspective(240px) rotateX(1deg)",
-        transformOrigin: "top",
+        transformStyle: isMobile && "preserve-3d",
+        transform: isMobile && "perspective(240px) rotateX(1deg)",
+        transformOrigin: isMobile && "top",
       }}
     >
-      <div className="trigger !mx-auto h-[300vh]">
-        <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start">
-          <div className="container pb-[3.5rem] pt-[7.5rem]">
-            <div className="mx-auto flex h-full w-full items-center justify-between gap-[1.25rem]">
-              <div className="flex w-1/2 justify-center gap-[1.5rem]">
-                <div
-                  ref={wrapper}
-                  className="relative grid grid-cols-4 grid-rows-4 items-center gap-[3rem]"
-                >
-                  {Array.from({ length: 16 }).map((_, index) => {
-                    const selectedIndex = [0, 3, 5, 6, 9, 10, 12, 15];
-                    let isRed = selectedIndex.includes(index);
-                    return (
-                      <Image
-                        data-strength-x={
-                          index % 4 === 1 || index % 4 === 2 ? 1 : 0.5
-                        }
-                        data-strength-y={
-                          Math.floor(index / 4) === 0 ||
-                          Math.floor(index / 4) === 3
-                            ? 0.5
-                            : 1
-                        }
-                        id={index}
-                        key={index}
-                        ref={(el) => (circles.current[index] = el)}
-                        src={
-                          isRed ? "/symmetry/red.svg" : "/symmetry/yellow.svg"
-                        }
-                        alt="vinyl"
-                        width={120}
-                        height={120}
-                        className={`pointer-events-none self-center justify-self-center mix-blend-overlay`}
-                      />
-                    );
-                  })}
+      <div className="trigger !mx-auto h-[300vh] lg:h-auto">
+        <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start lg:static lg:h-full">
+          <div className="container pb-[3.5rem] pt-[7.5rem] lg:pb-[5.714rem] lg:pt-[4.571rem]">
+            <div className="mx-auto flex h-full w-full items-center justify-between gap-[1.25rem] lg:flex-col-reverse">
+              <div className="flex w-1/2 justify-center gap-[1.5rem] px-[1.714rem] lg:w-full">
+                <div className="relative hidden w-1/3 items-end lg:flex">
                   <Image
-                    src="/symmetry/plus.svg"
-                    alt="center"
-                    width={80}
-                    height={80}
-                    className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                    src="/symmetry/circleGroup.svg"
+                    width={151}
+                    height={350}
+                    alt="Circles"
+                    className="circle h-auto w-[10.714rem] max-w-none"
                   />
                 </div>
+                <div className="lg:flex lg:w-2/3 lg:flex-col lg:items-center">
+                  <div
+                    ref={wrapper}
+                    className="relative grid grid-cols-4 grid-rows-4 items-center gap-[3rem] lg:w-2/3 lg:max-w-[28rem] lg:gap-[0.857rem]"
+                  >
+                    {Array.from({ length: 16 }).map((_, index) => {
+                      const selectedIndex = [0, 3, 5, 6, 9, 10, 12, 15];
+                      let isRed = selectedIndex.includes(index);
+                      return (
+                        <Image
+                          data-strength-x={
+                            index % 4 === 1 || index % 4 === 2 ? 1 : 0.5
+                          }
+                          data-strength-y={
+                            Math.floor(index / 4) === 0 ||
+                            Math.floor(index / 4) === 3
+                              ? 0.5
+                              : 1
+                          }
+                          id={index}
+                          key={index}
+                          ref={(el) => (circles.current[index] = el)}
+                          src={
+                            isRed ? "/symmetry/red.svg" : "/symmetry/yellow.svg"
+                          }
+                          alt="vinyl"
+                          width={120}
+                          height={120}
+                          className={`pointer-events-none h-auto self-center justify-self-center mix-blend-overlay lg:w-[5.714rem] lg:mix-blend-normal`}
+                        />
+                      );
+                    })}
+                    <Image
+                      src="/symmetry/plus.svg"
+                      alt="center"
+                      width={80}
+                      height={80}
+                      className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:w-[2.286rem]"
+                    />
+                  </div>
+                  <div className="mt-[2rem] hidden w-full rounded-[2rem] bg-white px-[2rem] py-[1.5rem] lg:mx-[1.714rem] lg:block">
+                    <p className="heading-4 mb-[1rem] text-center text-black">
+                      SLIDE TO MOVE RECORDS
+                    </p>
+                    <input
+                      ref={sliderRef}
+                      type="range"
+                      min="-1"
+                      max="0"
+                      step="0.001"
+                      defaultValue={0}
+                      onInput={updatePositions}
+                      className="slider h-[3px] w-full rotate-180 appearance-none rounded-full bg-black"
+                    />
+                  </div>
+                </div>
               </div>
-              <div className="flex h-full w-1/2 gap-[1.5rem]">
-                <div className="h-full w-1/6"></div>
-                <div className="flex h-full w-5/6 flex-col justify-center">
+              <div className="flex h-full w-1/2 gap-[1.5rem] lg:w-full">
+                <div className="h-full w-1/6 lg:hidden"></div>
+                <div className="flex h-full w-4/6 flex-col justify-center lg:w-full">
                   <h2 className="title heading-2 mb-[2rem]">Symmetry</h2>
-                  <p className="subtitle heading-3 mb-[1.5rem] w-[80%]">
+                  <p className="subtitle heading-3 mb-[1.5rem] w-full lg:w-5/6">
                     A sense of balance that's as timeless as a Miles Davis tune.
                   </p>
                   <p className="paragraph mb-[2rem]">
@@ -211,7 +287,7 @@ export default function Symmetry() {
                     order. It makes the complex approachable, like a melody you
                     hum long after the record's spun out.
                   </p>
-                  <div className="heading-6 mt-[2rem] flex items-center gap-[1rem]">
+                  <div className="heading-6 mt-[2rem] flex items-center gap-[1rem] lg:hidden">
                     <Image
                       src="/symmetry/triangle.svg"
                       alt="Carret left"
@@ -222,7 +298,7 @@ export default function Symmetry() {
                     Hover to move the records!
                   </div>
                   <div className="mt-[4rem] flex justify-end">
-                    <div className="relative flex flex-col items-center">
+                    <div className="relative flex flex-col items-center lg:hidden">
                       <Image
                         src="/symmetry/black.svg"
                         alt="circles"

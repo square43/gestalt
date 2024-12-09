@@ -4,12 +4,14 @@
 
 :root {
   --red: #cf4f24;
+  --rose: #d62400;
   --orange: #eb7114;
   --yellow: #ecba5d;
   --ochre: #e69600;
   --green: #00a674;
   --blue: #20a4ca;
   --purple: #4b27b1;
+  --night-purple: #18042d;
   --teal: #147995;
   --white: #f8ebcb;
   --black: #231f20;
@@ -134,6 +136,7 @@ body {
   }
   .heading-2 {
     font-size: 4.571rem; /* 64px */
+    letter-spacing: 0;
   }
   .heading-3 {
     font-size: 2.2.429; /* 34px */

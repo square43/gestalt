@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
 import Image from "next/image";
 
-export default function FocalPoint() {
+export default function FocalPoint({ isMobile }) {
   const panel = useRef();
 
   useGSAP(
@@ -29,8 +29,8 @@ export default function FocalPoint() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.1,
         ease: "elastic.out(1.2,1)",
@@ -40,8 +40,8 @@ export default function FocalPoint() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.1,
         ease: "elastic.out(1.2,1)",
@@ -51,8 +51,8 @@ export default function FocalPoint() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom bottom" : "center bottom",
         },
         stagger: 0.01,
       });
@@ -60,8 +60,8 @@ export default function FocalPoint() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "80% bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "80% center" : "80% bottom",
           scrub: true,
         },
       });
@@ -78,16 +78,16 @@ export default function FocalPoint() {
     <div
       ref={panel}
       id="section9"
-      className="panel shadow-[0_0_30px_0_rgba(0,0,0,0.25)]"
+      className="panel shadow-[0_0_30px_0_rgba(0,0,0,0.25)] lg:shadow-none"
       style={{
-        transformStyle: "preserve-3d",
-        transform: "perspective(240px) rotateX(1deg)",
-        transformOrigin: "top",
+        transformStyle: isMobile && "preserve-3d",
+        transform: isMobile && "perspective(240px) rotateX(1deg)",
+        transformOrigin: isMobile && "top",
       }}
     >
-      <div className="trigger !mx-auto h-[300vh]">
-        <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start bg-gradient-to-b from-[#18042D] via-[#440089] via-65% to-[#8000FF]">
-          <div className="absolute bottom-0 left-0 h-full w-full overflow-hidden">
+      <div className="trigger !mx-auto h-[300vh] lg:h-auto lg:min-h-[73.143rem]">
+        <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start bg-gradient-to-b from-[#18042D] via-[#440089] via-65% to-[#8000FF] lg:relative">
+          <div className="absolute bottom-0 left-0 h-full w-full overflow-hidden lg:hidden">
             <Image
               priority
               src={`/focal-point/8.png`}
@@ -109,28 +109,52 @@ export default function FocalPoint() {
               />
             ))}
           </div>
-          <div className="container pt-[7.75rem]">
-            <div className="mx-auto flex w-10/12 justify-end">
-              <div className="w-1/2">
-                <h2 className="title heading-2 mb-[2rem]">Focal Point</h2>
-                <p className="subtitle heading-3 mb-[1.5rem] w-[80%]">
-                  The spotlight should always be on the star!
-                </p>
-                <p className="paragraph mb-[2rem]">
-                  In every composition, there's a lead instrument—a focal point
-                  that grabs your attention and doesn't let go. This gestalt
-                  principle is the anchor, the spotlight, the center of the
-                  visual stage. Without it, images feel like a band with no
-                  soloist, aimless and lost.
-                </p>
-                <p className="paragraph">
-                  Focal points create harmony in the visual noise, guiding the
-                  viewer through the composition. They keep the beat steady,
-                  ensuring that even the most experimental designs have a rhythm
-                  to follow. In the world of perception, the focal point is the
-                  melody that keeps the crowd swinging.
-                </p>
-                <div className="mt-[4rem] flex justify-end">
+          <div className="absolute bottom-0 left-0 z-[8] hidden h-full w-full overflow-hidden lg:block">
+            <Image
+              priority
+              src={`/focal-point/7M.png`}
+              alt="Decorative background"
+              width={768}
+              height={620}
+              className={`lifeParallax absolute bottom-0 left-0 z-[-7] w-full max-w-none`}
+            />
+            {Array.from({ length: 6 }).map((_, index) => (
+              <Image
+                priority
+                src={`/focal-point/${index + 1}M.png`}
+                alt="Decorative background"
+                key={index}
+                width={768}
+                height={620}
+                className={`lifeParallax absolute bottom-0 left-0 w-full max-w-none ${index == 5 ? "light" : "building"}`}
+                style={{ zIndex: -index }}
+              />
+            ))}
+          </div>
+          <div className="container relative z-[10] pt-[7.75rem]">
+            <div className="mx-auto flex w-10/12 justify-end lg:h-full lg:w-full">
+              <div className="w-1/2 lg:flex lg:w-full lg:flex-col lg:justify-between">
+                <div>
+                  <h2 className="title heading-2 mb-[2rem]">Focal Point</h2>
+                  <p className="subtitle heading-3 mb-[1.5rem] w-[80%]">
+                    The spotlight should always be on the star!
+                  </p>
+                  <p className="paragraph mb-[2rem]">
+                    In every composition, there's a lead instrument—a focal
+                    point that grabs your attention and doesn't let go. This
+                    gestalt principle is the anchor, the spotlight, the center
+                    of the visual stage. Without it, images feel like a band
+                    with no soloist, aimless and lost.
+                  </p>
+                  <p className="paragraph">
+                    Focal points create harmony in the visual noise, guiding the
+                    viewer through the composition. They keep the beat steady,
+                    ensuring that even the most experimental designs have a
+                    rhythm to follow. In the world of perception, the focal
+                    point is the melody that keeps the crowd swinging.
+                  </p>
+                </div>
+                <div className="mt-[4rem] flex justify-end lg:mb-[5.714rem]">
                   <Image
                     src="/focal-point/focal.svg"
                     alt="Decorative object"

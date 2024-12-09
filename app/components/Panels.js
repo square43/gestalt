@@ -19,7 +19,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Panels = () => {
   const main = useRef();
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < 1100 : false,
+  );
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 1100);
@@ -70,19 +72,19 @@ const Panels = () => {
                 },
               },
             );
-            if (dots[i]) {
-              gsap.to(dots[i], {
-                scale: 1,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: panels[i],
-                  start: "-100% top",
-                  end: "top top",
-                  scrub: true,
-                },
-              });
-            }
           }
+        }
+        if (dots[i]) {
+          gsap.to(dots[i], {
+            scale: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: panels[i],
+              start: isMobile ? "start bottom" : "-100% top",
+              end: isMobile ? "bottom bottom" : "top top",
+              scrub: true,
+            },
+          });
         }
       });
     },
@@ -96,28 +98,30 @@ const Panels = () => {
         <div>
           <Similarity isMobile={isMobile} />
           <Closure isMobile={isMobile} />
-          <Continuity />
-          <Figure />
-          <Simplicity />
-          <Symmetry />
-          <PersistenceOfVision />
-          <FocalPoint />
+          <Continuity isMobile={isMobile} />
+          <Figure isMobile={isMobile} />
+          <Simplicity isMobile={isMobile} />
+          <Symmetry isMobile={isMobile} />
+          <PersistenceOfVision isMobile={isMobile} />
+          <FocalPoint isMobile={isMobile} />
           <Footer />
         </div>
       </div>
 
-      {/* <Nav
+      <Nav
+        isMobile={isMobile}
         principles={[
-          { color: "bg-[#28AFB0]", name: "" },
-          { color: "bg-[#F4D35E]", name: "Similarity" },
-          { color: "bg-[#EE964B]", name: "Closure" },
-          { color: "bg-[#F786AA]", name: "Continuity" },
-          { color: "bg-[#86dc7d]", name: "Figure-Ground" },
-          { color: "bg-[#ff9191]", name: "Simplicity" },
-          { color: "bg-[#28AFB0]", name: "Symmetry" },
-          { color: "bg-[#F4D35E]", name: "Persistence of Vision" },
+          { color: "bg-orange", name: "" },
+          { color: "bg-teal", name: "Similarity" },
+          { color: "bg-green", name: "Closure" },
+          { color: "bg-yellow", name: "Continuity" },
+          { color: "bg-rose", name: "Figure Ground" },
+          { color: "bg-red", name: "Simplicity" },
+          { color: "bg-blue", name: "Symmetry" },
+          { color: "bg-ochre", name: "Persistence of Vision" },
+          { color: "bg-purple", name: "Focal Point" },
         ]}
-      /> */}
+      />
     </div>
   );
 };

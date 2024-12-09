@@ -26,8 +26,8 @@ export default function Similarity({ isMobile }) {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.1,
         ease: "elastic.out(1.2,1)",
@@ -37,8 +37,8 @@ export default function Similarity({ isMobile }) {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.1,
         ease: "elastic.out(1.2,1)",
@@ -48,8 +48,8 @@ export default function Similarity({ isMobile }) {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.01,
       });
@@ -68,8 +68,8 @@ export default function Similarity({ isMobile }) {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "80% bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "center center" : "80% bottom",
           scrub: true,
         },
       });
@@ -85,18 +85,18 @@ export default function Similarity({ isMobile }) {
     <div
       ref={panel}
       id="section2"
-      className={`panel bg-teal shadow-[0_0_30px_0_rgba(0,0,0,0.25)]`}
+      className={`panel bg-teal shadow-[0_0_30px_0_rgba(0,0,0,0.25)] lg:shadow-none`}
       style={{
-        transformStyle: !isMobile && "preserve-3d",
-        transform: !isMobile && "perspective(240px) rotateX(1deg)",
-        transformOrigin: !isMobile && "top",
+        transformStyle: isMobile && "preserve-3d",
+        transform: isMobile && "perspective(240px) rotateX(1deg)",
+        transformOrigin: isMobile && "top",
       }}
     >
-      <div className="trigger lg:h-auto !mx-auto h-[300vh]">
-        <div className="lg:static lg:h-full sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start">
-          <div className="lg:pb-[6.786rem] container py-[3.5rem] pt-[4.571rem]">
-            <div className="lg:w-full mx-auto flex h-full w-10/12 flex-col justify-start gap-[4.688rem]">
-              <div className="lg:gap-[0.347rem] flex w-full justify-between gap-[1rem]">
+      <div className="trigger !mx-auto h-[300vh] lg:h-auto">
+        <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start lg:static lg:h-full">
+          <div className="container py-[3.5rem] pt-[4.571rem] lg:pb-[6.786rem]">
+            <div className="mx-auto flex h-full w-10/12 flex-col justify-start gap-[4.688rem] lg:w-full">
+              <div className="flex w-full justify-between gap-[1rem] lg:gap-[0.347rem]">
                 {Array.from({ length: 14 }).map((_, index) => (
                   <div key={index} className="relative">
                     <Image
@@ -118,8 +118,8 @@ export default function Similarity({ isMobile }) {
                   </div>
                 ))}
               </div>
-              <div className="lg:flex-col lg:gap-[4rem] flex w-full justify-between">
-                <div className="lg:w-full w-1/2">
+              <div className="flex w-full justify-between lg:flex-col lg:gap-[4rem]">
+                <div className="w-1/2 lg:w-full">
                   <h2 className="title heading-2 mb-[2rem]">Similarity</h2>
                   <p className="subtitle heading-3 mb-[1.5rem]">
                     It's a groove we can't resist! It simplifies complexity.
@@ -139,7 +139,7 @@ export default function Similarity({ isMobile }) {
                     same ensemble.
                   </p>
                 </div>
-                <div className="lg:w-full flex w-2/5 flex-col justify-end gap-[1rem]">
+                <div className="flex w-2/5 flex-col justify-end gap-[1rem] lg:w-full">
                   {Array.from({ length: 5 }).map((_, index) => (
                     <Image
                       src={`/similarity/${index % 2 == 0 ? "white.svg" : "blue.svg"}`}
@@ -156,7 +156,7 @@ export default function Similarity({ isMobile }) {
                       alt="Circles"
                       width={704}
                       height={88}
-                      className="circles lg:block hidden h-auto w-full max-w-none"
+                      className="circles hidden h-auto w-full max-w-none lg:block"
                       key={index}
                     />
                   ))}

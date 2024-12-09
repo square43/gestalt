@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
 import Image from "next/image";
 
-export default function Figure() {
+export default function Figure({ isMobile }) {
   const panel = useRef();
   useGSAP(
     () => {
@@ -28,8 +28,8 @@ export default function Figure() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.1,
         ease: "elastic.out(1.2,1)",
@@ -39,8 +39,8 @@ export default function Figure() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.1,
         ease: "elastic.out(1.2,1)",
@@ -50,8 +50,8 @@ export default function Figure() {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.01,
       });
@@ -70,21 +70,21 @@ export default function Figure() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "70% bottom",
+          start: isMobile ? "top top" : "top top",
+          end: isMobile ? "80% center" : "70% bottom",
           scrub: true,
         },
       });
 
       tl.from(".first", {
-        yPercent: 100,
+        yPercent: isMobile ? 10 : 100,
         autoAlpha: 0,
         ease: "power2.inOut",
       })
         .from(
           ".second",
           {
-            yPercent: 100,
+            yPercent: isMobile ? 10 : 100,
             autoAlpha: 0,
             ease: "power2.inOut",
           },
@@ -93,7 +93,7 @@ export default function Figure() {
         .from(
           ".third",
           {
-            yPercent: 100,
+            yPercent: isMobile ? 10 : 100,
             autoAlpha: 0,
             ease: "power2.inOut",
           },
@@ -106,18 +106,18 @@ export default function Figure() {
     <div
       ref={panel}
       id="section5"
-      className={`panel bg-white shadow-[0_0_30px_0_rgba(0,0,0,0.25)]`}
+      className={`panel bg-white shadow-[0_0_30px_0_rgba(0,0,0,0.25)] lg:shadow-none`}
       style={{
-        transformStyle: "preserve-3d",
-        transform: "perspective(240px) rotateX(1deg)",
-        transformOrigin: "top",
+        transformStyle: isMobile && "preserve-3d",
+        transform: isMobile && "perspective(240px) rotateX(1deg)",
+        transformOrigin: isMobile && "top",
       }}
     >
-      <div className="trigger !mx-auto h-[300vh]">
-        <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start">
-          <div className="container pb-[3.5rem] pt-[7.5rem]">
-            <div className="mx-auto flex h-full w-full items-start justify-between gap-[1.25rem]">
-              <div className="relative flex w-5/12 items-start justify-between gap-[1.5rem]">
+      <div className="trigger !mx-auto h-[300vh] lg:h-auto">
+        <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start lg:static lg:h-full">
+          <div className="container pb-[3.5rem] pt-[7.5rem] lg:py-[4.571rem]">
+            <div className="mx-auto flex h-full w-full items-start justify-between gap-[1.25rem] lg:flex-col-reverse lg:gap-[2.857rem]">
+              <div className="relative flex w-5/12 items-start justify-between gap-[1.5rem] lg:mx-auto lg:w-2/3 lg:justify-center">
                 <div>
                   <Image
                     src="/figure/red.svg"
@@ -146,10 +146,10 @@ export default function Figure() {
                   />
                 </div>
               </div>
-              <div className="spacer h-full w-1/12"></div>
-              <div className="flex h-full w-5/12 flex-col justify-center text-black">
+              <div className="spacer h-full w-1/12 lg:hidden"></div>
+              <div className="flex h-full w-5/12 flex-col justify-center text-black lg:w-full">
                 <h2 className="title heading-2 mb-[2rem]">Figure Ground</h2>
-                <p className="subtitle heading-3 mb-[1.5rem]">
+                <p className="subtitle heading-3 mb-[1.5rem] lg:w-5/6">
                   This Visual Principle isn't static. It's dynamic, man!
                 </p>
                 <p className="paragraph mb-[2rem]">
@@ -164,7 +164,7 @@ export default function Figure() {
                   engaged, their eyes darting between figure and ground,
                   savoring the visual interplay.
                 </p>
-                <div className="mt-[4rem] flex justify-end gap-[4rem]">
+                <div className="mt-[4rem] flex justify-end gap-[4rem] lg:hidden">
                   <Image
                     src={`/figure/small-red.svg`}
                     alt="objects"

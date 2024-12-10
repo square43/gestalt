@@ -10,6 +10,7 @@ export default function Continuity({ isMobile }) {
   const sliderRef = useRef(null);
 
   const [dotLottie, setDotLottie] = useState(null);
+  const [dotLottieMobile, setDotLottieMobile] = useState(null);
 
   useGSAP(
     () => {
@@ -77,10 +78,16 @@ export default function Continuity({ isMobile }) {
   const dotLottieRefCallback = (dotLottie) => {
     setDotLottie(dotLottie);
   };
+  const dotLottieRefCallbackMobile = (dotLottie) => {
+    setDotLottieMobile(dotLottie);
+  };
 
   const handleLottieChange = ({ target }) => {
     if (dotLottie) {
       dotLottie.setFrame(parseFloat(target.value));
+    }
+    if (dotLottieMobile) {
+      dotLottieMobile.setFrame(parseFloat(target.value));
     }
   };
   return (
@@ -158,12 +165,12 @@ export default function Continuity({ isMobile }) {
             <DotLottieReact
               dotLottieRefCallback={dotLottieRefCallback}
               src="/continuity/notes-new.json"
-              className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 lg:hidden"
+              className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 lg:pointer-events-none lg:opacity-0"
             />
             <DotLottieReact
-              dotLottieRefCallback={dotLottieRefCallback}
+              dotLottieRefCallback={dotLottieRefCallbackMobile}
               src="/continuity/notes-newT.json"
-              className="pointer-events-none hidden max-h-[21.429rem] lg:block"
+              className="pointer-events-none max-h-[21.429rem] opacity-0 lg:opacity-100"
             />
             <div className="mt-[2rem] hidden rounded-[2rem] bg-white px-[2rem] py-[1.5rem] lg:mx-[1.714rem] lg:block md:mt-0 md:p-[1.2rem] md:pb-[1.7rem]">
               <p className="heading-4 mb-[1rem] text-center text-black">

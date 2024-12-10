@@ -26,8 +26,8 @@ export default function Closure({ isMobile }) {
         scaleY: 0,
         scrollTrigger: {
           trigger: ".trigger",
-          start: "top top",
-          end: "center bottom",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
         },
         stagger: 0.1,
         ease: "elastic.out(1.2,1)",

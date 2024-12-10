@@ -187,6 +187,7 @@ export default function PersistenceOfVision({ isMobile }) {
                     height={1080}
                     className="h-auto w-[800%] max-w-none"
                     style={{ transform: `translateX(-${frame * (100 / 8)}%)` }}
+                    priority
                   />
                 </div>
               </div>

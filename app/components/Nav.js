@@ -1,14 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLenis } from "lenis/react";
 import Image from "next/image";
 import Popup from "./Popup";
 export default function Nav({ principles, isMobile }) {
   const lenis = useLenis();
   const [isOpen, setIsOpen] = useState(false);
+  const [directionNum, setDirectionNum] = useState(0);
+
+  const handleScroll = ({ direction }) => {
+    if (directionNum != direction) {
+      setDirectionNum(direction);
+    }
+  };
+
+  if (lenis) {
+    lenis.on("scroll", handleScroll);
+  }
+
   return (
     <>
-      <div className="fixed right-[6rem] top-1/2 z-[999] flex -translate-y-1/2 flex-col gap-[1rem] lg:bottom-[1rem] lg:left-1/2 lg:right-auto lg:top-auto lg:-translate-x-1/2 lg:translate-y-0 lg:flex-row-reverse lg:items-center">
-        <div className="flex flex-col items-center gap-[1rem] rounded-full bg-white p-[1rem] lg:flex-row-reverse lg:p-[0.8rem]">
+      <div className="fixed right-[6rem] top-1/2 z-[999] flex -translate-y-1/2 flex-col gap-[1rem] lg:bottom-[1rem] lg:left-1/2 lg:right-auto lg:top-auto lg:-translate-x-1/2 lg:translate-y-0 lg:flex-row lg:items-center">
+        <div className="flex flex-col items-center gap-[1rem] rounded-full bg-white p-[1rem] lg:flex-row lg:p-[0.8rem]">
           {principles.map((principle, index) => (
             <button
               key={index}
@@ -42,7 +54,7 @@ export default function Nav({ principles, isMobile }) {
         </div>
         <div
           onClick={() => setIsOpen(true)}
-          className="flex h-[4rem] w-[4rem] cursor-pointer items-center justify-center rounded-full bg-white lg:h-[2.857rem] lg:w-[2.857rem]"
+          className="left-0 top-0 flex h-[4rem] w-[4rem] cursor-pointer items-center justify-center rounded-full bg-white lg:h-[2.857rem] lg:w-[2.857rem] md:hidden"
         >
           <Image
             src="/info.svg"
@@ -54,6 +66,18 @@ export default function Nav({ principles, isMobile }) {
         </div>
       </div>
       <Popup setIsOpen={setIsOpen} isOpen={isOpen} />
+      <div
+        onClick={() => setIsOpen(true)}
+        className={`fixed left-[1.846rem] hidden h-[2.462rem] w-[2.462rem] cursor-pointer items-center justify-center rounded-full bg-white transition-all duration-500 md:flex ${directionNum == 1 ? "top-0 -translate-y-full" : "top-[1.538rem] z-[1000] translate-y-0"}`}
+      >
+        <Image
+          src="/info.svg"
+          alt="Info popup"
+          width={17}
+          height={42}
+          className="lg:w-[0.75rem]"
+        />
+      </div>
     </>
   );
 }

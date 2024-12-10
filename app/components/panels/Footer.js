@@ -51,14 +51,14 @@ export default function Footer({ isMobile }) {
     <div
       id="footer"
       ref={footer}
-      className="relative z-[100] bg-gradient-to-b from-[#147995] to-[#20A4CA] py-[5rem]"
+      className="relative z-[100] bg-gradient-to-b from-[#147995] to-[#20A4CA] py-[5rem] md:py-[4rem]"
     >
       <div className="trigger container">
         <div className="mx-auto flex w-2/3 flex-col items-center lg:w-full">
           <h2 className="title heading-2 mb-[2rem] text-center">
             ...And many more!
           </h2>
-          <div className="w-3/4 lg:w-2/3">
+          <div className="w-3/4 lg:w-2/3 md:w-full">
             <p className="paragraph mb-[2rem]">
               The world of visual principles stretches far beyond the few we've
               explored here. The world is brimming with visual
@@ -79,6 +79,14 @@ export default function Footer({ isMobile }) {
               alt="Record player"
               width={1160}
               height={871}
+              className="md:hidden"
+            />
+            <Image
+              src="/footer/playerM.svg"
+              alt="Record player"
+              width={344}
+              height={250}
+              className="hidden h-auto w-[26.923rem] max-w-none md:block"
             />
             <Image
               src="/footer/real.svg"
@@ -96,7 +104,7 @@ export default function Footer({ isMobile }) {
             />
             <Link
               href="https://lab.square43.com"
-              className="heading-6 absolute bottom-[22.3%] left-1/2 flex -translate-x-1/2 items-center gap-[1rem] rounded-full bg-black p-[1rem] pr-[1.5rem] transition duration-500 hover:bg-white hover:text-black lg:bottom-[20%] lg:p-[0.5rem] lg:pr-[1rem]"
+              className="heading-6 absolute bottom-[22.3%] left-1/2 flex -translate-x-1/2 items-center gap-[1rem] rounded-full bg-black p-[1rem] pr-[1.5rem] transition duration-500 hover:bg-white hover:text-black lg:bottom-[20%] lg:p-[0.5rem] lg:pr-[1rem] md:hidden"
             >
               <Image
                 src="/footer/buttonIcon.svg"
@@ -108,10 +116,29 @@ export default function Footer({ isMobile }) {
               Back to the lab
             </Link>
           </div>
+          <Link
+            href="https://lab.square43.com"
+            className="heading-6 mt-[4rem] hidden w-full items-center justify-center rounded-full bg-black p-[0.5rem] pr-[1.5rem] transition duration-500 hover:bg-white hover:text-black lg:pr-[1rem] md:flex"
+          >
+            <Image
+              src="/footer/buttonIcon.svg"
+              alt="Button icon"
+              width={64}
+              height={64}
+              className="h-auto w-[4rem] max-w-none"
+            />
+            <span className="w-full text-center">Back to the lab</span>
+          </Link>
         </div>
-        <footer className="container flex justify-between gap-[1.25rem] pt-[2rem] lg:flex-col">
-          <div className="w-1/6 lg:flex lg:w-full lg:justify-between">
-            <Image src="/footer/logo.svg" alt="Logo" width={271} height={93} />
+        <footer className="container flex justify-between gap-[1.25rem] pt-[2rem] lg:flex-col md:pb-[3.5rem] md:pt-[4.923rem]">
+          <div className="w-1/6 lg:flex lg:w-full lg:justify-between md:flex-col md:items-center md:gap-[4.308rem]">
+            <Image
+              src="/footer/logo.svg"
+              alt="Logo"
+              width={271}
+              height={93}
+              className="md:h-auto md:w-[26.923rem]"
+            />
             <Link
               href="https://square43.com"
               target="_blank"
@@ -122,10 +149,11 @@ export default function Footer({ isMobile }) {
                 alt="Logo"
                 width={271}
                 height={95}
+                className="md:h-auto md:w-[20.846rem]"
               />
             </Link>
           </div>
-          <div className="flex w-1/6 flex-col items-center justify-center lg:w-full lg:flex-row lg:items-end lg:justify-between">
+          <div className="flex w-1/6 flex-col items-center justify-center lg:w-full lg:flex-row lg:items-end lg:justify-between md:mt-[1.5rem] md:flex-col-reverse md:items-center md:gap-[3.692rem]">
             <p className="paragraph hidden text-center lg:block">
               ©MMXXIV &#8226; Square43 Studio
             </p>

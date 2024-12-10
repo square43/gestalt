@@ -71,7 +71,7 @@ export default function Figure({ isMobile }) {
         scrollTrigger: {
           trigger: ".trigger",
           start: isMobile ? "top top" : "top top",
-          end: isMobile ? "80% center" : "70% bottom",
+          end: isMobile ? "70% center" : "70% bottom",
           scrub: true,
         },
       });
@@ -115,9 +115,9 @@ export default function Figure({ isMobile }) {
     >
       <div className="trigger !mx-auto h-[300vh] lg:h-auto">
         <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start lg:static lg:h-full">
-          <div className="container pb-[3.5rem] pt-[7.5rem] lg:py-[4.571rem]">
-            <div className="mx-auto flex h-full w-full items-start justify-between gap-[1.25rem] lg:flex-col-reverse lg:gap-[2.857rem]">
-              <div className="relative flex w-5/12 items-start justify-between gap-[1.5rem] lg:mx-auto lg:w-2/3 lg:justify-center">
+          <div className="container pb-[3.5rem] pt-[7.5rem] lg:py-[4.571rem] md:pb-0 md:pt-[4rem]">
+            <div className="mx-auto flex h-full w-full items-start justify-between gap-[1.25rem] lg:flex-col-reverse lg:gap-[2.857rem] md:relative md:pb-[50rem]">
+              <div className="relative flex w-5/12 items-start justify-between gap-[1.5rem] lg:mx-auto lg:w-2/3 lg:justify-center md:absolute md:bottom-0 md:left-1/2 md:w-[41rem] md:-translate-x-1/2 md:items-center">
                 <div>
                   <Image
                     src="/figure/red.svg"
@@ -149,7 +149,7 @@ export default function Figure({ isMobile }) {
               <div className="spacer h-full w-1/12 lg:hidden"></div>
               <div className="flex h-full w-5/12 flex-col justify-center text-black lg:w-full">
                 <h2 className="title heading-2 mb-[2rem]">Figure Ground</h2>
-                <p className="subtitle heading-3 mb-[1.5rem] lg:w-5/6">
+                <p className="subtitle heading-3 mb-[1.5rem] lg:w-5/6 md:w-full">
                   This Visual Principle isn't static. It's dynamic, man!
                 </p>
                 <p className="paragraph mb-[2rem]">
@@ -188,8 +188,31 @@ export default function Figure({ isMobile }) {
                   />
                 </div>
               </div>
-              <div className="spacer h-full w-1/12"></div>
+              <div className="spacer h-full w-1/12 lg:hidden"></div>
             </div>
+          </div>
+          <div className="mb-[4rem] mt-[5.538rem] hidden justify-center gap-[2.385rem] md:flex">
+            <Image
+              src={`/figure/small-red.svg`}
+              alt="objects"
+              width={96}
+              height={153}
+              className="objects h-auto w-[6.25rem]"
+            />
+            <Image
+              src={`/figure/small-blue.svg`}
+              alt="objects"
+              width={96}
+              height={153}
+              className="objects h-auto w-[6.25rem]"
+            />
+            <Image
+              src={`/figure/small-red.svg`}
+              alt="objects"
+              width={96}
+              height={153}
+              className="objects h-auto w-[6.25rem]"
+            />
           </div>
         </div>
       </div>

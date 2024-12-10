@@ -82,7 +82,7 @@ export default function Symmetry({ isMobile }) {
       const mappedValueY = event.target.value;
       const mouseOnRight = event.target.value > width / 2;
       const mouseOnBottom = event.target.value > height / 2;
-      const intensity = 150;
+      const intensity = width / 4;
 
       const calculateOffset = (isPositive, value, strength) =>
         isPositive
@@ -177,7 +177,7 @@ export default function Symmetry({ isMobile }) {
 
       // Cleanup event listener
       return () => {
-        if (wrapper) {
+        if (wrapper.current) {
           wrapper.current.removeEventListener("mousemove", updatePositions);
         }
       };
@@ -197,10 +197,10 @@ export default function Symmetry({ isMobile }) {
     >
       <div className="trigger !mx-auto h-[300vh] lg:h-auto">
         <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start lg:static lg:h-full">
-          <div className="container pb-[3.5rem] pt-[7.5rem] lg:pb-[5.714rem] lg:pt-[4.571rem]">
-            <div className="mx-auto flex h-full w-full items-center justify-between gap-[1.25rem] lg:flex-col-reverse">
-              <div className="flex w-1/2 justify-center gap-[1.5rem] px-[1.714rem] lg:w-full">
-                <div className="relative hidden w-1/3 items-end lg:flex">
+          <div className="container pb-[3.5rem] pt-[7.5rem] lg:pb-[5.714rem] lg:pt-[4.571rem] md:pb-[4rem] md:pt-[4rem]">
+            <div className="mx-auto flex h-full w-full items-center justify-between gap-[1.25rem] lg:flex-col-reverse md:gap-[4rem]">
+              <div className="flex w-1/2 justify-center gap-[1.5rem] px-[1.714rem] lg:w-full md:flex-col md:px-0">
+                <div className="relative hidden w-1/3 items-end lg:flex md:hidden">
                   <Image
                     src="/symmetry/circleGroup.svg"
                     width={151}
@@ -209,10 +209,10 @@ export default function Symmetry({ isMobile }) {
                     className="circle h-auto w-[10.714rem] max-w-none"
                   />
                 </div>
-                <div className="lg:flex lg:w-2/3 lg:flex-col lg:items-center">
+                <div className="lg:flex lg:w-2/3 lg:flex-col lg:items-center md:w-full">
                   <div
                     ref={wrapper}
-                    className="relative grid grid-cols-4 grid-rows-4 items-center gap-[3rem] lg:w-2/3 lg:max-w-[28rem] lg:gap-[0.857rem]"
+                    className="relative grid grid-cols-4 grid-rows-4 items-center gap-[3rem] lg:w-2/3 lg:max-w-[28rem] lg:gap-[0.857rem] md:w-full md:max-w-none"
                   >
                     {Array.from({ length: 16 }).map((_, index) => {
                       const selectedIndex = [0, 3, 5, 6, 9, 10, 12, 15];
@@ -237,7 +237,7 @@ export default function Symmetry({ isMobile }) {
                           alt="vinyl"
                           width={120}
                           height={120}
-                          className={`pointer-events-none h-auto self-center justify-self-center mix-blend-overlay lg:w-[5.714rem] lg:mix-blend-normal`}
+                          className={`pointer-events-none h-auto self-center justify-self-center mix-blend-overlay lg:w-[5.714rem] lg:mix-blend-normal md:w-[5.538rem]`}
                         />
                       );
                     })}
@@ -246,10 +246,10 @@ export default function Symmetry({ isMobile }) {
                       alt="center"
                       width={80}
                       height={80}
-                      className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:w-[2.286rem]"
+                      className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:w-[2.286rem] md:w-[3.077rem]"
                     />
                   </div>
-                  <div className="mt-[2rem] hidden w-full rounded-[2rem] bg-white px-[2rem] py-[1.5rem] lg:mx-[1.714rem] lg:block">
+                  <div className="mt-[2rem] hidden w-full rounded-[2rem] bg-white px-[2rem] py-[1.5rem] lg:mx-[1.714rem] lg:block md:mt-[4rem] md:p-[1.231rem] md:pb-[2rem]">
                     <p className="heading-4 mb-[1rem] text-center text-black">
                       SLIDE TO MOVE RECORDS
                     </p>
@@ -265,7 +265,32 @@ export default function Symmetry({ isMobile }) {
                     />
                   </div>
                 </div>
+                <div className="relative hidden flex-col items-center md:mt-[4rem] md:flex">
+                  <Image
+                    src="/symmetry/black.svg"
+                    alt="circles"
+                    width={276}
+                    height={106}
+                    className="circle h-auto w-[17.25rem]"
+                  />
+                  <Image
+                    src="/symmetry/blue.svg"
+                    alt="circles"
+                    width={369}
+                    height={106}
+                    className="circle my-[-5rem] h-auto w-[23.063rem]"
+                  />
+                  <Image
+                    src="/symmetry/white.svg"
+                    alt="circles"
+                    width={276}
+                    height={106}
+                    className="circle h-auto w-[17.25rem]"
+                  />
+                  <div className="absolute left-1/2 top-0 h-full w-[3px] -translate-x-1/2 bg-teal"></div>
+                </div>
               </div>
+
               <div className="flex h-full w-1/2 gap-[1.5rem] lg:w-full">
                 <div className="h-full w-1/6 lg:hidden"></div>
                 <div className="flex h-full w-4/6 flex-col justify-center lg:w-full">
@@ -297,8 +322,8 @@ export default function Symmetry({ isMobile }) {
                     />
                     Hover to move the records!
                   </div>
-                  <div className="mt-[4rem] flex justify-end">
-                    <div className="relative flex flex-col items-center lg:hidden">
+                  <div className="mt-[4rem] flex justify-end lg:hidden">
+                    <div className="relative flex flex-col items-center">
                       <Image
                         src="/symmetry/black.svg"
                         alt="circles"

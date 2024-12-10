@@ -94,6 +94,17 @@ export default function PersistenceOfVision({ isMobile }) {
           stagger: 0.1,
         });
       }
+      gsap.from(".circlesM", {
+        delay: 1,
+        autoAlpha: 0,
+        x: "-7.5rem",
+        scrollTrigger: {
+          trigger: ".trigger",
+          start: isMobile ? "top center" : "top top",
+          end: isMobile ? "bottom center" : "center bottom",
+        },
+        stagger: 0.1,
+      });
     },
     { scope: panel },
   );
@@ -111,13 +122,13 @@ export default function PersistenceOfVision({ isMobile }) {
     >
       <div className="trigger !mx-auto h-[300vh] lg:h-auto">
         <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start lg:static lg:h-full">
-          <div className="container flex gap-[1.25rem] pb-[3.5rem] pt-[7.5rem] lg:flex-col lg:pb-[5.714rem] lg:pt-[4.571rem]">
+          <div className="container flex gap-[1.25rem] pb-[3.5rem] pt-[7.5rem] lg:flex-col lg:pb-[5.714rem] lg:pt-[4.571rem] md:pt-[4rem]">
             <div className="w-1/12 lg:hidden"></div>
             <div className="w-5/12 text-black lg:w-full">
-              <h2 className="title heading-2 mb-[2rem] lg:w-2/3">
+              <h2 className="title heading-2 mb-[2rem] lg:w-2/3 md:w-full">
                 Persistence of vision
               </h2>
-              <p className="subtitle heading-3 mb-[1.5rem] w-[80%]">
+              <p className="subtitle heading-3 mb-[1.5rem] w-[80%] md:w-2/3">
                 Pictures that make us move!
               </p>
               <p className="paragraph mb-[2rem]">
@@ -154,7 +165,7 @@ export default function PersistenceOfVision({ isMobile }) {
             </div>
             <div className="flex w-1/2 flex-col items-center lg:w-full">
               <div className="lg:flex lg:items-end">
-                <div className="mt-[4rem] hidden w-1/5 flex-col items-start lg:flex">
+                <div className="mt-[4rem] hidden w-1/5 flex-col items-start lg:flex md:hidden">
                   {Array.from({ length: 6 }).map((_, index) => (
                     <div
                       key={index}
@@ -167,7 +178,7 @@ export default function PersistenceOfVision({ isMobile }) {
                     ></div>
                   ))}
                 </div>
-                <div className="overflow-hidden lg:w-4/5">
+                <div className="overflow-hidden lg:w-4/5 md:mt-[1rem] md:w-full md:scale-[1.2]">
                   <Image
                     ref={image}
                     src={`/persistence-of-vision/sprite.png`}
@@ -180,11 +191,11 @@ export default function PersistenceOfVision({ isMobile }) {
                 </div>
               </div>
 
-              <div className="mt-[4rem] rounded-[2rem] bg-white px-[2rem] py-[1rem] lg:flex lg:w-full lg:items-center lg:justify-between">
-                <p className="heading-4 mb-[0.75rem] text-center uppercase text-black lg:mb-0 lg:w-1/3 lg:text-left">
+              <div className="mt-[4rem] rounded-[2rem] bg-white px-[2rem] py-[1rem] lg:flex lg:w-full lg:items-center lg:justify-between md:flex-col">
+                <p className="heading-4 mb-[0.75rem] text-center uppercase text-black lg:mb-0 lg:w-1/3 lg:text-left md:mb-[1rem] md:w-full md:text-center">
                   Frames per second
                 </p>
-                <div className="flex justify-between lg:gap-[1.429rem]">
+                <div className="flex justify-between lg:gap-[1.429rem] md:w-full">
                   {[
                     { label: "2", value: 500 },
                     { label: "12", value: 82 },
@@ -203,10 +214,10 @@ export default function PersistenceOfVision({ isMobile }) {
                       />
 
                       <div
-                        className={`flex h-[5rem] w-[3rem] justify-center rounded-full p-[0.5rem] transition-all duration-500 lg:h-[4rem] lg:w-[2.286rem] lg:p-[0.286rem] ${delay == value ? "bg-yellow" : "bg-ochre"}`}
+                        className={`flex h-[5rem] w-[3rem] justify-center rounded-full p-[0.5rem] transition-all duration-500 lg:h-[4rem] lg:w-[2.286rem] lg:p-[0.286rem] md:h-[6.154rem] md:w-[3.692rem] md:p-[0.615rem] ${delay == value ? "bg-yellow" : "bg-ochre"}`}
                       >
                         <div
-                          className={`h-[2rem] w-[2rem] bg-black transition-all duration-500 lg:h-[1.714rem] lg:w-[1.714rem] ${delay === value ? "translate-y-full" : "translate-y-0"} rounded-full`}
+                          className={`h-[2rem] w-[2rem] bg-black transition-all duration-500 lg:h-[1.714rem] lg:w-[1.714rem] md:h-[2.462rem] md:w-[2.462rem] ${delay === value ? "translate-y-full" : "translate-y-0"} rounded-full`}
                         ></div>
                       </div>
 
@@ -216,6 +227,19 @@ export default function PersistenceOfVision({ isMobile }) {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="mb-[4rem] hidden w-full scale-[0.8] items-end px-[] md:flex">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <div
+                key={index}
+                style={{
+                  outlineWidth: `${index + 5}px`,
+                  width: `calc(6.154rem + ${index * 0.5}rem)`,
+                  height: `calc(6.154rem + ${index * 0.5}rem)`,
+                }}
+                className={`circlesM mr-[-2.538rem] rounded-full outline outline-yellow`}
+              ></div>
+            ))}
           </div>
         </div>
       </div>

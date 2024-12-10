@@ -171,9 +171,9 @@ export default function Closure({ isMobile }) {
     >
       <div className="trigger !mx-auto h-[300vh] lg:h-auto">
         <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start lg:static lg:h-full">
-          <div className="container py-[3.5rem]">
-            <div className="mx-auto flex h-full w-10/12 items-center justify-between lg:w-full lg:gap-[1.25rem]">
-              <div className="relative flex w-[30%] flex-wrap items-center justify-center gap-[2rem] lg:w-1/2">
+          <div className="container py-[3.5rem] md:pb-[4rem]">
+            <div className="mx-auto flex h-full w-10/12 items-center justify-between lg:w-full lg:gap-[1.25rem] md:flex-col-reverse md:gap-[4rem]">
+              <div className="relative flex w-[30%] flex-wrap items-center justify-center gap-[2rem] lg:w-1/2 md:w-full">
                 {Array.from({ length: 8 }).map((_, index) => (
                   <Image
                     src={`/closure/part${index + 1}.svg`}
@@ -181,7 +181,7 @@ export default function Closure({ isMobile }) {
                     width={192}
                     height={192}
                     key={index}
-                    className={`part${index + 1} w-[calc(50%-2rem)]`}
+                    className={`part${index + 1} w-[calc(50%-2rem)] md:w-[calc(50%-1rem)]`}
                   />
                 ))}
                 <Image
@@ -199,7 +199,7 @@ export default function Closure({ isMobile }) {
                   className="part10 absolute bottom-[25%] right-[20%] h-auto w-[22%] max-w-none"
                 />
               </div>
-              <div className="flex h-full w-1/2 flex-col justify-center">
+              <div className="flex h-full w-1/2 flex-col justify-center md:w-full">
                 <h2 className="title heading-2 mb-[2rem]">Closure</h2>
                 <p className="subtitle heading-3 mb-[1.5rem]">
                   A visual improv session that never fails to mesmerize!
@@ -230,14 +230,14 @@ export default function Closure({ isMobile }) {
                 </div>
               </div>
             </div>
-            <div className="mt-[3.214rem] hidden w-full justify-center gap-[4.286rem] lg:flex">
+            <div className="mt-[3.214rem] hidden w-full justify-center gap-[4.286rem] lg:flex md:gap-[1.3rem]">
               {Array.from({ length: 3 }).map((_, index) => (
                 <Image
                   src={`/closure/object${index + 1}.svg`}
                   alt="objects"
                   width={126}
                   height={126}
-                  className="objects h-auto w-[11.429rem]"
+                  className="objects h-auto w-[11.429rem] lg:w-[10rem] md:w-[7.385rem]"
                   key={index}
                 />
               ))}

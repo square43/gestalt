@@ -94,12 +94,12 @@ export default function Continuity({ isMobile }) {
         transformOrigin: isMobile && "top",
       }}
     >
-      <div className="trigger !mx-auto h-[300vh] pb-[5.714rem] lg:h-auto">
+      <div className="trigger !mx-auto h-[300vh] pb-[5.714rem] lg:h-auto md:pb-0">
         <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start lg:relative lg:h-full">
           <div className="container py-[3.5rem] lg:pb-[0] lg:pt-[4.571rem]">
             <div className="mx-auto flex h-full w-10/12 flex-col justify-between lg:w-full">
               <div className="flex w-full justify-between lg:gap-[1.25rem]">
-                <div className="w-1/2 text-black lg:w-[55%]">
+                <div className="w-1/2 text-black lg:w-[55%] md:w-full">
                   <h2 className="title heading-2 mb-[2rem]">Continuity</h2>
                   <p className="subtitle heading-3 mb-[1.5rem]">
                     Making your eye move like a needle on a record!
@@ -134,7 +134,7 @@ export default function Continuity({ isMobile }) {
                     />
                   </div>
                 </div>
-                <div className="flex w-2/5 items-center gap-[1rem] lg:w-1/3">
+                <div className="flex w-2/5 items-center gap-[1rem] lg:w-1/3 md:hidden">
                   <Image
                     src="/continuity/circles.svg"
                     alt="Decorative object"
@@ -154,7 +154,7 @@ export default function Continuity({ isMobile }) {
             </div>
           </div>
           {/* Treba srediti lottie */}
-          <div className="pointer-events-none absolute bottom-0 h-[18.75rem] w-full lg:pointer-events-auto lg:static lg:h-auto">
+          <div className="pointer-events-none absolute bottom-0 h-[18.75rem] w-full lg:pointer-events-auto lg:static lg:h-auto md:px-[]">
             <DotLottieReact
               dotLottieRefCallback={dotLottieRefCallback}
               src="/continuity/notes-new.json"
@@ -165,7 +165,7 @@ export default function Continuity({ isMobile }) {
               src="/continuity/notes-newT.json"
               className="pointer-events-none hidden max-h-[21.429rem] lg:block"
             />
-            <div className="mt-[2rem] hidden rounded-[2rem] bg-white px-[2rem] py-[1.5rem] lg:mx-[1.714rem] lg:block">
+            <div className="mt-[2rem] hidden rounded-[2rem] bg-white px-[2rem] py-[1.5rem] lg:mx-[1.714rem] lg:block md:mt-0 md:p-[1.2rem] md:pb-[1.7rem]">
               <p className="heading-4 mb-[1rem] text-center text-black">
                 SLIDE TO ARRANGE NOTES
               </p>
@@ -180,6 +180,13 @@ export default function Continuity({ isMobile }) {
                 className="slider h-[3px] w-full appearance-none rounded-full bg-black"
               />
             </div>
+            <Image
+              src="/continuity/circles.svg"
+              alt="Decorative object"
+              width={562}
+              height={343}
+              className="continuity-circles hidden h-auto w-full max-w-none md:my-[4rem] md:block md:px-[1.538rem]"
+            />
           </div>
         </div>
       </div>

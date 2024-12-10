@@ -85,8 +85,8 @@ export default function FocalPoint({ isMobile }) {
         transformOrigin: isMobile && "top",
       }}
     >
-      <div className="trigger !mx-auto h-[300vh] lg:h-auto lg:min-h-[73.143rem]">
-        <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start bg-gradient-to-b from-[#18042D] via-[#440089] via-65% to-[#8000FF] lg:relative">
+      <div className="trigger !mx-auto h-[300vh] lg:h-auto lg:min-h-[73.143rem] md:min-h-0">
+        <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start bg-gradient-to-b from-[#18042D] via-[#440089] via-65% to-[#8000FF] lg:relative md:h-auto">
           <div className="absolute bottom-0 left-0 h-full w-full overflow-hidden lg:hidden">
             <Image
               priority
@@ -109,7 +109,29 @@ export default function FocalPoint({ isMobile }) {
               />
             ))}
           </div>
-          <div className="absolute bottom-0 left-0 z-[8] hidden h-full w-full overflow-hidden lg:block">
+          <div className="absolute bottom-0 left-0 z-[8] hidden h-full w-full overflow-hidden lg:block md:hidden">
+            <Image
+              priority
+              src={`/focal-point/7T.png`}
+              alt="Decorative background"
+              width={768}
+              height={620}
+              className={`lifeParallax absolute bottom-0 left-0 z-[-7] w-full max-w-none`}
+            />
+            {Array.from({ length: 6 }).map((_, index) => (
+              <Image
+                priority
+                src={`/focal-point/${index + 1}T.png`}
+                alt="Decorative background"
+                key={index}
+                width={768}
+                height={620}
+                className={`lifeParallax absolute bottom-0 left-0 w-full max-w-none ${index == 5 ? "light" : "building"}`}
+                style={{ zIndex: -index }}
+              />
+            ))}
+          </div>
+          <div className="absolute bottom-0 left-0 z-[8] hidden h-full w-full overflow-hidden md:block">
             <Image
               priority
               src={`/focal-point/7M.png`}
@@ -124,14 +146,14 @@ export default function FocalPoint({ isMobile }) {
                 src={`/focal-point/${index + 1}M.png`}
                 alt="Decorative background"
                 key={index}
-                width={768}
-                height={620}
+                width={390}
+                height={572}
                 className={`lifeParallax absolute bottom-0 left-0 w-full max-w-none ${index == 5 ? "light" : "building"}`}
                 style={{ zIndex: -index }}
               />
             ))}
           </div>
-          <div className="container relative z-[10] pt-[7.75rem]">
+          <div className="container relative z-[10] pt-[7.75rem] md:pb-[44rem]">
             <div className="mx-auto flex w-10/12 justify-end lg:h-full lg:w-full">
               <div className="w-1/2 lg:flex lg:w-full lg:flex-col lg:justify-between">
                 <div>
@@ -154,7 +176,7 @@ export default function FocalPoint({ isMobile }) {
                     point is the melody that keeps the crowd swinging.
                   </p>
                 </div>
-                <div className="mt-[4rem] flex justify-end lg:mb-[5.714rem]">
+                <div className="mt-[4rem] flex justify-end lg:mb-[5.714rem] md:hidden">
                   <Image
                     src="/focal-point/focal.svg"
                     alt="Decorative object"
@@ -167,6 +189,15 @@ export default function FocalPoint({ isMobile }) {
             </div>
           </div>
         </div>
+      </div>
+      <div className="hidden w-full justify-center bg-night-purple py-[6.385rem] md:flex">
+        <Image
+          src="/focal-point/focal.svg"
+          alt="Decorative object"
+          width={224}
+          height={224}
+          className="relative h-auto w-[17.231rem]"
+        />
       </div>
     </div>
   );

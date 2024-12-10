@@ -11,7 +11,7 @@ export default function Popup({ setIsOpen, isOpen }) {
         className="absolute left-0 top-0 z-[0] h-full w-full bg-[#18042D80]"
       ></div>
       <div className="container flex items-center justify-center">
-        <div className="bg-night-purple relative z-[1] flex w-5/12 flex-col items-center rounded-[2.5rem] py-[3rem]">
+        <div className="relative z-[1] flex w-5/12 flex-col items-center rounded-[2.5rem] bg-night-purple py-[3rem] lg:w-2/3 md:w-full">
           <Image
             src="/close.svg"
             alt="Close popup"

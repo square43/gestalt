@@ -94,17 +94,19 @@ export default function Similarity({ isMobile }) {
     >
       <div className="trigger !mx-auto h-[300vh] lg:h-auto">
         <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start lg:static lg:h-full">
-          <div className="container py-[3.5rem] pt-[4.571rem] lg:pb-[6.786rem]">
-            <div className="mx-auto flex h-full w-10/12 flex-col justify-start gap-[4.688rem] lg:w-full">
+          <div className="container py-[3.5rem] pt-[4.571rem] lg:pb-[6.786rem] md:pb-[4.308rem] md:pt-[4.308rem]">
+            <div className="mx-auto flex h-full w-10/12 flex-col justify-start gap-[4.688rem] lg:w-full md:gap-[3.692rem]">
               <div className="flex w-full justify-between gap-[1rem] lg:gap-[0.347rem]">
                 {Array.from({ length: 14 }).map((_, index) => (
-                  <div key={index} className="relative">
+                  <div
+                    key={index}
+                    className={`relative ${index >= 7 ? "md:hidden" : null}`}
+                  >
                     <Image
                       src={`/similarity/tile${index + 1}.svg`}
                       alt="piano tile"
                       width={93.55}
                       height={325}
-                      className="lg:w-[]"
                     />
                     {index % 2 == 0 && (
                       <Image
@@ -151,14 +153,22 @@ export default function Similarity({ isMobile }) {
                     />
                   ))}
                   {Array.from({ length: 5 }).map((_, index) => (
-                    <Image
-                      src={`/similarity/${index % 2 == 0 ? "whiteM.svg" : "blueM.svg"}`}
-                      alt="Circles"
-                      width={704}
-                      height={88}
-                      className="circles hidden h-auto w-full max-w-none lg:block"
-                      key={index}
-                    />
+                    <div key={index}>
+                      <Image
+                        src={`/similarity/${index % 2 == 0 ? "whiteT.svg" : "blueT.svg"}`}
+                        alt="Circles"
+                        width={704}
+                        height={88}
+                        className="circles hidden h-auto w-full max-w-none lg:block md:hidden"
+                      />
+                      <Image
+                        src={`/similarity/${index % 2 == 0 ? "whiteM.svg" : "blueM.svg"}`}
+                        alt="Circles"
+                        width={350}
+                        height={32}
+                        className="circles hidden h-auto w-full max-w-none md:block"
+                      />
+                    </div>
                   ))}
                 </div>
               </div>

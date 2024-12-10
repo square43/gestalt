@@ -1,13 +1,16 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
 import { useLenis } from "lenis/react";
 import Image from "next/image";
+import Loading from "../Loading";
 export default function Welcome() {
   const panel = useRef();
   const lenis = useLenis();
   const eyes = useRef();
+
+  const [loadingFinished, setLoadingFinished] = useState(false);
 
   // Lock scrolling at the start
   useEffect(() => {
@@ -15,12 +18,10 @@ export default function Welcome() {
     setTimeout(() => {
       if (lenis) lenis.start();
     }, 4000);
-  }, [lenis]);
 
-  useGSAP(
-    () => {
-      const title = new SplitType("#section1 .title", { types: "chars" });
-      const subtitle = new SplitType("#section1 .subtitle", { types: "words" });
+    const title = new SplitType("#section1 .title", { types: "chars" });
+    const subtitle = new SplitType("#section1 .subtitle", { types: "words" });
+    if (loadingFinished) {
       gsap.set([title.chars, subtitle.words], {
         transformOrigin: "bottom",
       });
@@ -69,9 +70,10 @@ export default function Welcome() {
           });
         },
       });
-    },
-    { scope: panel },
-  );
+    }
+  }, [lenis, loadingFinished]);
+
+  useGSAP(() => {}, { scope: panel });
 
   useEffect(() => {
     const updateEyes = ({ clientX, clientY }) => {
@@ -102,45 +104,48 @@ export default function Welcome() {
   }, []);
 
   return (
-    <div
-      ref={panel}
-      id="section1"
-      className={`panel bg-orange shadow-[0_0_30px_0_rgba(0,0,0,0.25)]`}
-      style={{
-        transformOrigin: "top",
-      }}
-    >
-      <div className="trigger !mx-auto h-[300vh]">
-        <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-center">
-          <div className="container flex items-end">
-            <div className="mx-auto w-10/12">
-              <div className="absolute left-1/2 top-1/2 z-[2] flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center">
-                <h1 className="title heading-1 text-center">Perception</h1>
-                <h1 className="title heading-1 text-center">Playhouse</h1>
-                <p className="subtitle heading-3 mt-[2rem] text-center lg:max-w-[32.857rem]">
-                  A mixtape of visual quirks and principles!
-                </p>
-              </div>
-              <div className="imageWrap relative lg:absolute lg:bottom-0 lg:left-1/2 lg:h-[63.929rem] lg:w-[97.857rem] lg:-translate-x-1/2">
-                <div className="absolute bottom-[4.3%] left-1/2 z-[0] h-[12%] w-[27%] -translate-x-1/2">
-                  <div ref={eyes} className="relative h-full w-full bg-white">
-                    <div className="left-eye absolute left-[14.3%] top-1/2 h-[53%] w-[15.5%] -translate-y-1/2 rounded-full bg-gradient-to-b from-[#02260C] to-[#00A674]"></div>
-                    <div className="left-eye absolute right-[14.3%] top-1/2 h-[53%] w-[15.5%] -translate-y-1/2 rounded-full bg-gradient-to-b from-[#02260C] to-[#00A674]"></div>
-                  </div>
+    <>
+      <div
+        ref={panel}
+        id="section1"
+        className={`panel bg-orange shadow-[0_0_30px_0_rgba(0,0,0,0.25)]`}
+        style={{
+          transformOrigin: "top",
+        }}
+      >
+        <div className="trigger !mx-auto h-[300vh]">
+          <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-center">
+            <div className="container flex items-end">
+              <div className="mx-auto w-10/12">
+                <div className="absolute left-1/2 top-1/2 z-[2] flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center md:px-[1.538rem]">
+                  <h1 className="title heading-1 text-center">Perception</h1>
+                  <h1 className="title heading-1 text-center">Playhouse</h1>
+                  <p className="subtitle heading-3 mt-[2rem] text-center lg:max-w-[32.857rem]">
+                    A mixtape of visual quirks and principles!
+                  </p>
                 </div>
-                <Image
-                  src="/intro/intro.png"
-                  alt="Decorative background"
-                  width={1370}
-                  height={895}
-                  priority
-                  className="relative z-[1] h-auto w-full max-w-none"
-                />
+                <div className="imageWrap relative lg:absolute lg:bottom-0 lg:left-1/2 lg:h-[63.929rem] lg:w-[97.857rem] lg:-translate-x-1/2 md:flex md:w-[80.923rem] md:items-end">
+                  <div className="absolute bottom-[4.3%] left-1/2 z-[0] h-[12%] w-[27%] -translate-x-1/2">
+                    <div ref={eyes} className="relative h-full w-full bg-white">
+                      <div className="left-eye absolute left-[14.3%] top-1/2 h-[53%] w-[15.5%] -translate-y-1/2 rounded-full bg-gradient-to-b from-[#02260C] to-[#00A674]"></div>
+                      <div className="left-eye absolute right-[14.3%] top-1/2 h-[53%] w-[15.5%] -translate-y-1/2 rounded-full bg-gradient-to-b from-[#02260C] to-[#00A674]"></div>
+                    </div>
+                  </div>
+                  <Image
+                    src="/intro/intro.png"
+                    alt="Decorative background"
+                    width={1370}
+                    height={895}
+                    priority
+                    className="relative z-[1] h-auto w-full max-w-none"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <Loading setLoadingFinished={setLoadingFinished} />
+    </>
   );
 }

@@ -14,7 +14,10 @@ export default function Welcome() {
 
   // Lock scrolling at the start
   useEffect(() => {
-    if (lenis) lenis.stop();
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+      lenis.stop();
+    }
     setTimeout(() => {
       if (lenis) lenis.start();
     }, 4000);

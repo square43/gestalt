@@ -56,7 +56,7 @@ export default function Loading({ setLoadingFinished }) {
           {progress < 10 && "0"}
           {progress}
         </span>
-        <span className="fmd:text-[3.692rem] ont-pretorian text-[4rem] uppercase leading-[1.1] tracking-[0.1em] text-white lg:text-[4.571rem]">
+        <span className="font-pretorian text-[4rem] uppercase leading-[1.1] tracking-[0.1em] text-white lg:text-[4.571rem] md:text-[3.692rem]">
           Loading
         </span>
       </div>

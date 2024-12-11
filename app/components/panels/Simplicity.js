@@ -97,7 +97,7 @@ export default function Simplicity({ isMobile }) {
         <div className="sticky left-0 top-0 flex h-screen w-full flex-col items-center justify-start lg:static lg:h-full">
           <div className="container pb-[3.5rem] pt-[7.5rem] md:pt-[4rem]">
             <div className="mx-auto flex h-full w-10/12 items-start justify-between gap-[1.25rem] lg:w-full lg:items-center md:flex-col">
-              <div className="flex h-full w-1/2 flex-col justify-start md:w-full">
+              <div className="flex h-full w-1/2 flex-col justify-start md:w-full md:items-center">
                 <h2 className="title heading-2 mb-[2rem]">Simplicity</h2>
                 <p className="subtitle heading-3 mb-[1.5rem] w-[80%] lg:w-full">
                   Simplicity is the cool, clean groove that conducts every great
@@ -123,9 +123,9 @@ export default function Simplicity({ isMobile }) {
                   height={240}
                   className="camera mt-[4rem] w-[40%] lg:hidden"
                 />
-                <div className="mb-[4.143rem] mt-[1.714rem] hidden rounded-full bg-white px-[3.571rem] py-[1.143rem] text-black lg:flex md:mb-0 md:flex-row-reverse">
-                  <span className="heading-6 md:text-center">
-                    press to see the saxophone parts!
+                <div className="mb-[4.143rem] mt-[1.714rem] hidden rounded-full px-[3.571rem] py-[1.143rem] lg:flex md:mb-0 md:max-w-[23rem] md:flex-row-reverse md:gap-[1rem]">
+                  <span className="heading-6">
+                    Tap the saxophone to see it's parts!
                   </span>
                   <Image
                     src="/simplicity/triangle.svg"
